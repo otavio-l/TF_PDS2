@@ -1,0 +1,6 @@
+[requires]
+sfml/2.6.1
+doxygen/1.14.0
+
+[generators]
+PkgConfigDeps
