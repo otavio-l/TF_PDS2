@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "C++ gdb BUILDER",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-c",
+                "/usr/bin/g++ -Iinclude -g -Wall -Wextra -Wconversion -Wsign-conversion -Werror -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/build/jogo_gdb $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "C++ ASAN BUILDER",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "-c",
+                "/usr/bin/g++ -Iinclude -g -O1 -fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Wconversion -Wsign-conversion -Werror -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/build/jogo_asan $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
