@@ -5,7 +5,7 @@
             "name": "Lets debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/jogo_gdb",
+            "program": "${workspaceFolder}/jogo_gdb",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "MIMode": "gdb",
@@ -16,7 +16,7 @@
             "name": "Run with ASAN (no gdb)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/jogo_asan",
+            "program": "${workspaceFolder}/jogo_asan",
             "cwd": "${workspaceFolder}",
             "environment": [
                 { "name": "ASAN_OPTIONS", "value": "detect_leaks=1:verbosity=1" }
