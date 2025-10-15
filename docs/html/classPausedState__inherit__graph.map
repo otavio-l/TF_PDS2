@@ -1,0 +1,5 @@
+<map id="PausedState" name="PausedState">
+<area shape="rect" id="Node000001" title="Representa o estado de pausa." alt="" coords="5,79,108,104"/>
+<area shape="rect" id="Node000002" href="$classGameState.html" title="Classe base abstrata para diferentes estados do jogo." alt="" coords="9,5,104,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,44,59,79,54,79,54,44"/>
+</map>

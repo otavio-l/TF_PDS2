@@ -1,0 +1,5 @@
+<map id="PlayState" name="PlayState">
+<area shape="rect" id="Node000001" title="Representa o estado do jogo." alt="" coords="11,79,95,104"/>
+<area shape="rect" id="Node000002" href="$classGameState.html" title="Classe base abstrata para diferentes estados do jogo." alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,44,55,79,50,79,50,44"/>
+</map>
