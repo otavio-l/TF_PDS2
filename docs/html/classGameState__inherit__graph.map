@@ -1,0 +1,9 @@
+<map id="GameState" name="GameState">
+<area shape="rect" id="Node000001" title="Classe base abstrata para diferentes estados do jogo." alt="" coords="125,5,220,31"/>
+<area shape="rect" id="Node000002" href="$classMenuState.html" title="Representa o estado do menu principal." alt="" coords="5,79,97,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="142,40,73,81,70,76,140,35"/>
+<area shape="rect" id="Node000003" href="$classPausedState.html" title="Representa o estado de pausa." alt="" coords="121,79,224,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,44,175,79,170,79,170,44"/>
+<area shape="rect" id="Node000004" href="$classPlayState.html" title="Representa o estado do jogo." alt="" coords="248,79,332,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="205,35,272,76,269,81,202,40"/>
+</map>
