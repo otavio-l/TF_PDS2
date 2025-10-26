@@ -1,6 +1,9 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+
+#include "game.hpp"
+
 #include <SFML/Graphics.hpp>
 /**
 * @brief Classe base abstrata para diferentes estados do jogo.
@@ -8,7 +11,9 @@
 * Cada estado define sua própria lógica de manipulação de entrada, atualização e renderização.
 */
 class GameState {
+    Game& game;
 public:
+    GameState(Game& game) : game(game) {};
 //! Manipula a entrada para este estado.
     virtual void handleInput() = 0;
     //! Atualiza a lógica do estado.
