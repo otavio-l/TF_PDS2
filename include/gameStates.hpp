@@ -11,6 +11,7 @@
 * Cada estado define sua própria lógica de manipulação de entrada, atualização e renderização.
 */
 class GameState {
+protected:
     Game& game;
 public:
     GameState(Game& game) : game(game) {};
@@ -34,6 +35,7 @@ public:
 };
 //! Representa o estado do jogo.
 class PlayState : public GameState {
+public:
     PlayState(Game &game);
     void handleInput() override;
     void update(float dt) override;
@@ -41,6 +43,7 @@ class PlayState : public GameState {
 };
 //! Representa o estado de pausa.
 class PausedState : public GameState {
+public:
     PausedState(Game &game);
     void handleInput() override;
     void update(float dt) override;
