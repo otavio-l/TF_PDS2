@@ -1,3 +1,6 @@
+#ifndef SYSTEMS_ENTITIES_H
+#define SYSTEMS_ENTITIES_H
+
 #include "entityManager.hpp"
 /**
 * @brief Atualiza as posições das entidades com base em suas velocidades.
@@ -16,4 +19,4 @@ public:
     void draw(EntityManager& em, sf::RenderWindow& window);
 };
 
-
+#endif

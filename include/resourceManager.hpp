@@ -1,3 +1,6 @@
+#ifndef RESOURCE_MANAGER_H
+#define RESOURCE_MANAGER_H
+
 #include <unordered_map>
 #include <string>
 #include <SFML/Graphics.hpp>
@@ -24,3 +27,5 @@ public:
 */   
     sf::Texture& getTexture(const std::string& name);
 };
+
+#endif

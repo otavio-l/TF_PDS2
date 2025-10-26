@@ -1,3 +1,6 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <SFML/Graphics.hpp>
 
 /**
@@ -15,3 +18,5 @@ public:
 //! Altera o estado atual do jogo (menu, jogar, pausado, etc.).
     void changeGameState();
 };
+
+#endif

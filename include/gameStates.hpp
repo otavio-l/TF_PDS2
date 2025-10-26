@@ -1,3 +1,6 @@
+#ifndef GAME_STATE_H
+#define GAME_STATE_H
+
 #include <SFML/Graphics.hpp>
 /**
 * @brief Classe base abstrata para diferentes estados do jogo.
@@ -23,4 +26,4 @@ class PlayState : public GameState {};
 //! Representa o estado de pausa.
 class PausedState : public GameState {};
 
-
+#endif

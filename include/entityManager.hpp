@@ -1,3 +1,6 @@
+#ifndef ENTITY_MANAGER_H
+#define ENTITY_MANAGER_H
+
 #include <cstdint>
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
@@ -35,3 +38,5 @@ public:
     //! Retorna todas as entidades que possuem um componente Sprite.
     std::vector<Entity> viewWithSprite();
 };
+
+#endif
