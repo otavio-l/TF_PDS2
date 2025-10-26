@@ -25,10 +25,26 @@ public:
     virtual ~GameState() = default;
 };
 //! Representa o estado do menu principal.
-class MenuState : public GameState {};
+class MenuState : public GameState {
+public:
+    MenuState(Game &game);
+    void handleInput() override;
+    void update(float dt) override;
+    void render(sf::RenderWindow& window) override;
+};
 //! Representa o estado do jogo.
-class PlayState : public GameState {};
+class PlayState : public GameState {
+    PlayState(Game &game);
+    void handleInput() override;
+    void update(float dt) override;
+    void render(sf::RenderWindow& window) override;
+};
 //! Representa o estado de pausa.
-class PausedState : public GameState {};
+class PausedState : public GameState {
+    PausedState(Game &game);
+    void handleInput() override;
+    void update(float dt) override;
+    void render(sf::RenderWindow& window) override;
+};
 
 #endif
