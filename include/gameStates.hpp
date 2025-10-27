@@ -3,6 +3,7 @@
 
 
 #include "game.hpp"
+#include "resourceManager.hpp"
 
 #include <SFML/Graphics.hpp>
 /**
@@ -13,6 +14,7 @@
 class GameState {
 protected:
     Game& game;
+    ResourceManager resources;
 public:
     GameState(Game& game) : game(game) {};
 //! Manipula a entrada para este estado.
