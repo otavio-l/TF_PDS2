@@ -39,8 +39,9 @@ public:
     //! Adiciona componentes à entidade fornecida (implementação a ser definida).
     void addComponent(Entity e, const T& comp);
 
-    //! Retorna todas as entidades que possuem um componente Sprite.
-    std::vector<Entity> viewWithSprite();
+    //! Retorna todas as entidades que possuem um componente de dado tipo
+    template <typename Component>
+    std::vector<Entity> withComponent();
 };
 
 #endif
