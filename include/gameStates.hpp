@@ -5,6 +5,7 @@
 #include "game.hpp"
 #include "resourceManager.hpp"
 #include "entityManager.hpp"
+#include "systemsEntities.hpp"
 
 #include <SFML/Graphics.hpp>
 /**
@@ -19,7 +20,7 @@ protected:
 public:
     GameState(Game& game) : game(game) {};
 //! Manipula a entrada para este estado.
-    virtual void handleInput() = 0;
+    virtual void handleInput(sf::Event& event) = 0;
     //! Atualiza a lógica do estado.
 //! @param dt Delta de tempo desde o último quadro.
     virtual void update(float dt) = 0;
@@ -28,28 +29,32 @@ public:
 
     virtual ~GameState() = default;
 };
+
 //! Representa o estado do menu principal.
 class MenuState : public GameState {
 public:
     MenuState(Game &game);
-    void handleInput() override;
+    void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
+
 //! Representa o estado do jogo.
 class PlayState : public GameState {
     EntityManager entities;
+    InputSystem inputSystem;
 public:
     PlayState(Game &game);
-    void handleInput() override;
+    void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
+
 //! Representa o estado de pausa.
 class PausedState : public GameState {
 public:
     PausedState(Game &game);
-    void handleInput() override;
+    void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };

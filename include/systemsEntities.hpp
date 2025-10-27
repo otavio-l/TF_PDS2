@@ -2,21 +2,19 @@
 #define SYSTEMS_ENTITIES_H
 
 #include "entityManager.hpp"
-/**
-* @brief Atualiza as posições das entidades com base em suas velocidades.
-*/
-class PhysicsSystem {
-public:
-//! Atualiza todas as entidades habilitadas para física.
-    void update(EntityManager& em, float dt);
+
+typedef struct Direction {
+    bool up;
+    bool down;
+    bool right;
+    bool left;
 };
-/**
-* @brief Desenha entidades que possuem um componente Sprite.
-*/
-class RenderSystem {
+
+class InputSystem {
+    Direction direction;
 public:
-//! Renderiza todas as entidades de sprite na janela.
-    void draw(EntityManager& em, sf::RenderWindow& window);
+    void contiunuousAction(sf::Event& event);
+    void updateVelocity(EntityManager& entities);
 };
 
 #endif

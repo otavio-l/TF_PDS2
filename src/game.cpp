@@ -6,10 +6,12 @@ Game::Game() {
 }
 
 void Game::run() {
-    sf::Clock clock;
+    sf::Clock clock{};
+    sf::Event event{};
     while (window.isOpen()) {
         float dt = clock.restart().asSeconds();
-        currentState->handleInput();
+        while (window.pollEvent(event))
+            currentState->handleInput(event);
         currentState->update(dt);
         window.clear();
         currentState->render(window);
