@@ -34,3 +34,9 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,
 
     return true;
 }
+
+void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    states.transform *= getTransform();
+    states.texture = &m_tileset;
+    target.draw(m_vertices, states);
+}

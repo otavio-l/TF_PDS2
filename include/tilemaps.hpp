@@ -21,6 +21,10 @@ public:
 */
     bool load(const std::string& fileName, sf::Vector2u tileSize, 
               const std::vector<std::vector<int>>& matrixTiles);
+
+private:
+    // Override from SFML drawable class
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 };
 
 #endif
