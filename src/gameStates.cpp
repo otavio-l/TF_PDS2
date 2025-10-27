@@ -1,8 +1,14 @@
 #include "gameStates.hpp"
 
-MenuState::MenuState(Game &game) : GameState(game) {}
-PlayState::PlayState(Game &game) : GameState(game) {}
-PausedState::PausedState(Game &game) : GameState(game) {}
+MenuState::MenuState(Game &game) : GameState(game) {
+    // TODO: resources.loadTexture();
+}
+PlayState::PlayState(Game &game) : GameState(game) {
+    // TODO: resources.loadTexture();
+}
+PausedState::PausedState(Game &game) : GameState(game) {
+    // TODO: resources.loadTexture();
+}
 
 void MenuState::handleInput() {}
 void PlayState::handleInput() {}
