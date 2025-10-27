@@ -23,17 +23,21 @@ struct Sprite  { sf::Sprite sprite; };
 * aquelas que possuem componentes específicos.
 */
 class EntityManager {
+    // Each entity may or may not have this components
     std::unordered_map<Entity, Position> positions;
     std::unordered_map<Entity, Velocity> velocities;
     std::unordered_map<Entity, Sprite> sprites;
     Entity nextEntity;
 
 public:
+    EntityManager();
+
 //! Cria uma nova entidade única e retorna seu identificador.
     Entity createEntity();
 
+    template <typename T>
     //! Adiciona componentes à entidade fornecida (implementação a ser definida).
-    void addComponent(Entity e);
+    void addComponent(Entity e, const T& comp);
 
     //! Retorna todas as entidades que possuem um componente Sprite.
     std::vector<Entity> viewWithSprite();

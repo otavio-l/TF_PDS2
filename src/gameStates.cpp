@@ -5,6 +5,9 @@ MenuState::MenuState(Game &game) : GameState(game) {
 }
 PlayState::PlayState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
+    /*TODO: Entity player = entities.createEntity();
+    entities.addComponent<Position>(player, {100.f, 200.f});
+    ...*/
 }
 PausedState::PausedState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();

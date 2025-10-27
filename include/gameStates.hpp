@@ -4,6 +4,7 @@
 
 #include "game.hpp"
 #include "resourceManager.hpp"
+#include "entityManager.hpp"
 
 #include <SFML/Graphics.hpp>
 /**
@@ -37,6 +38,7 @@ public:
 };
 //! Representa o estado do jogo.
 class PlayState : public GameState {
+    EntityManager entities;
 public:
     PlayState(Game &game);
     void handleInput() override;
