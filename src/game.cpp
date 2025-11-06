@@ -2,6 +2,7 @@
 
 
 Game::Game() {
+    //make_unique is available on c++17 forward
     this->currentState = std::unique_ptr<MenuState>(new MenuState(*this));
 }
 
@@ -20,5 +21,6 @@ void Game::run() {
 }
 
 void Game::changeGameState(std::unique_ptr<GameState> newState) {
+    // deletes currentState and change the owner of newState
     this->currentState = std::move(newState);
 }

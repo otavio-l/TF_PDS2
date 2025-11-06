@@ -5,9 +5,9 @@ MenuState::MenuState(Game &game) : GameState(game) {
 }
 PlayState::PlayState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
-    /*TODO: Entity player = entities.createEntity();
-    entities.addComponent<Position>(player, {100.f, 200.f});
-    ...*/
+    // TODO: Entity player = entities.createEntity();
+    // TODO: entities.addComponent<Position>(player, {100.f, 200.f});
+    // TODO: if( !tilemap.load(...) );
 }
 PausedState::PausedState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
@@ -15,8 +15,9 @@ PausedState::PausedState(Game &game) : GameState(game) {
 
 
 void GameState::handleInput(sf::Event& event)  {
-    if (event.type == sf::Event::Closed)
+    if (event.type == sf::Event::Closed) {
         // TODO: Close
+    }
 }
 
 void MenuState::handleInput(sf::Event& event) {}
@@ -29,6 +30,7 @@ void PlayState::handleInput(sf::Event& event) {
             game.changeGameState(std::unique_ptr<MenuState>(new MenuState(game)));
     }
 
+    // ACTION WITHOUT INTERVALS (walk)
     inputSystem.contiunuousAction(event);
 }
 
@@ -40,11 +42,15 @@ void PausedState::handleInput(sf::Event& event) {
 
 void MenuState::update(float dt) {}
 void PlayState::update(float dt) {
+    // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
     inputSystem.updateVelocity(entities);
+    // TODO: if( !tilemap.load(...) );
 }
 void PausedState::update(float dt) {}
 
 
 void MenuState::render(sf::RenderWindow& window) {}
-void PlayState::render(sf::RenderWindow& window) {}
+void PlayState::render(sf::RenderWindow& window) {
+    window.draw(this->tilemap);
+}
 void PausedState::render(sf::RenderWindow& window) {}
