@@ -11,7 +11,7 @@ TileMap::TileMap(const std::string& tileset, const TileMapCode& tileCodeMatrix,
 
     for (unsigned i = 0; i < g_xTiles; ++i)
         for (unsigned j = 0; j < g_yTiles; ++j) {
-            std::uint8_t tileCode = tileCodeMatrix.code[j][i];
+            std::uint8_t tileCode = tileCodeMatrix[j][i];
             int rowTexture = tileCode % (this->textureSet.getSize().x / tileSizeBits);
             int colTexture = tileCode / (this->textureSet.getSize().x / tileSizeBits);
 
