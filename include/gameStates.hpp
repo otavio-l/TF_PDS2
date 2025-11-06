@@ -2,10 +2,12 @@
 #define GAME_STATE_H
 
 
+#include <memory>
 #include "game.hpp"
 #include "resourceManager.hpp"
 #include "entityManager.hpp"
 #include "systemsEntities.hpp"
+#include "tilemaps.hpp"
 
 #include <SFML/Graphics.hpp>
 /**
@@ -43,11 +45,14 @@ public:
 class PlayState : public GameState {
     EntityManager entities;
     InputSystem inputSystem;
+    std::unique_ptr<TileMap> background;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
+
+    void changeBackground(std::unique_ptr<TileMap> newBackground);
 };
 
 //! Representa o estado de pausa.

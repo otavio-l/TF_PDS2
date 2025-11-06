@@ -2,11 +2,9 @@
 
 constexpr int tileSizeBits = 32;
 
-bool TileMap::load(const std::string& tileset, const TileMapCode& tileCodeMatrix) {
-    // sf::VertexArray is basically a dynamic flat array of [position and texture]
-    if (!this->textureSet.loadFromFile(tileset))
-        // TODO: ResourceManager
-        return false;
+TileMap::TileMap(const std::string& tileset, const TileMapCode& tileCodeMatrix, 
+    ResourceManager& resourceManager) {
+    this->textureSet = resourceManager.getTexture(tileset);
 
     this->background.setPrimitiveType(sf::Quads);
     this->background.resize(g_xTiles * g_yTiles * 4);
@@ -28,8 +26,6 @@ bool TileMap::load(const std::string& tileset, const TileMapCode& tileCodeMatrix
             firstVerticeSquare[2].texCoords = sf::Vector2f((rowTexture + 1) * tileSizeBits, (colTexture + 1) * tileSizeBits);
             firstVerticeSquare[3].texCoords = sf::Vector2f(rowTexture * tileSizeBits, (colTexture + 1) * tileSizeBits);
         }
-
-    return true;
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {

@@ -44,13 +44,18 @@ void MenuState::update(float dt) {}
 void PlayState::update(float dt) {
     // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
     inputSystem.updateVelocity(entities);
-    // TODO: if( !tilemap.load(...) );
+    // TODO: if (...) changeBackground(..., resourceManager)
 }
 void PausedState::update(float dt) {}
 
 
 void MenuState::render(sf::RenderWindow& window) {}
 void PlayState::render(sf::RenderWindow& window) {
-    window.draw(this->tilemap);
+    window.draw(*this->background);
 }
 void PausedState::render(sf::RenderWindow& window) {}
+
+
+void PlayState::changeBackground(std::unique_ptr<TileMap> newBackground) {
+    this->background = std::move(newBackground);
+}
