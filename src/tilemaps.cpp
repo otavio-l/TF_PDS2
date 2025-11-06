@@ -1,35 +1,32 @@
 #include "tilemaps.hpp"
 
-bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, 
-                   const std::vector<std::vector<int>>& matrixTiles) {
+constexpr int tileSizeBits = 32;
+
+bool TileMap::load(const std::string& tileset, const TileMapCode& tileCodeMatrix) {
     // sf::VertexArray is basically a dynamic flat array of [position and texture]
-    // m_tileset is a matrix of blocks of texture
-    if (!m_tileset.loadFromFile(tileset))
+    if (!this->textureSet.loadFromFile(tileset))
         // TODO: ResourceManager
         return false;
 
-    unsigned widthInSquares = matrixTiles[0].size();
-    unsigned heightInSquares = matrixTiles.size();
-    m_vertices.setPrimitiveType(sf::Quads);
-    m_vertices.resize(widthInSquares * heightInSquares * 4);
-    m_matrixTiles = matrixTiles;
+    this->background.setPrimitiveType(sf::Quads);
+    this->background.resize(g_xTiles * g_yTiles * 4);
 
-    for (unsigned i = 0; i < widthInSquares; ++i)
-        for (unsigned j = 0; j < heightInSquares; ++j) {
-            int tileNumber = matrixTiles[j][i];
-            int rowTexture = tileNumber % (m_tileset.getSize().x / tileSize.x);
-            int colTexture = tileNumber / (m_tileset.getSize().x / tileSize.x);
+    for (unsigned i = 0; i < g_xTiles; ++i)
+        for (unsigned j = 0; j < g_yTiles; ++j) {
+            std::uint8_t tileCode = tileCodeMatrix.code[j][i];
+            int rowTexture = tileCode % (this->textureSet.getSize().x / tileSizeBits);
+            int colTexture = tileCode / (this->textureSet.getSize().x / tileSizeBits);
 
-            sf::Vertex* firstVerticeSquare = &m_vertices[(i + j * widthInSquares) * 4];
-            firstVerticeSquare[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
-            firstVerticeSquare[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
-            firstVerticeSquare[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
-            firstVerticeSquare[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+            sf::Vertex* firstVerticeSquare = &this->background[(i + j * g_xTiles) * 4];
+            firstVerticeSquare[0].position = sf::Vector2f(i * tileSizeBits, j * tileSizeBits);
+            firstVerticeSquare[1].position = sf::Vector2f((i + 1) * tileSizeBits, j * tileSizeBits);
+            firstVerticeSquare[2].position = sf::Vector2f((i + 1) * tileSizeBits, (j + 1) * tileSizeBits);
+            firstVerticeSquare[3].position = sf::Vector2f(i * tileSizeBits, (j + 1) * tileSizeBits);
 
-            firstVerticeSquare[0].texCoords = sf::Vector2f(rowTexture * tileSize.x, colTexture * tileSize.y);
-            firstVerticeSquare[1].texCoords = sf::Vector2f((rowTexture + 1) * tileSize.x, colTexture * tileSize.y);
-            firstVerticeSquare[2].texCoords = sf::Vector2f((rowTexture + 1) * tileSize.x, (colTexture + 1) * tileSize.y);
-            firstVerticeSquare[3].texCoords = sf::Vector2f(rowTexture * tileSize.x, (colTexture + 1) * tileSize.y);
+            firstVerticeSquare[0].texCoords = sf::Vector2f(rowTexture * tileSizeBits, colTexture * tileSizeBits);
+            firstVerticeSquare[1].texCoords = sf::Vector2f((rowTexture + 1) * tileSizeBits, colTexture * tileSizeBits);
+            firstVerticeSquare[2].texCoords = sf::Vector2f((rowTexture + 1) * tileSizeBits, (colTexture + 1) * tileSizeBits);
+            firstVerticeSquare[3].texCoords = sf::Vector2f(rowTexture * tileSizeBits, (colTexture + 1) * tileSizeBits);
         }
 
     return true;
@@ -37,6 +34,6 @@ bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     states.transform *= getTransform();
-    states.texture = &m_tileset;
-    target.draw(m_vertices, states);
+    states.texture = &this->textureSet;
+    target.draw(this->background, states);
 }

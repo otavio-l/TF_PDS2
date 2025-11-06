@@ -1,15 +1,24 @@
 #ifndef TILEMAPS_H
 #define TILEMAPS_H
 
+#include <array>
+#include <cstdint>
 #include <SFML/Graphics.hpp>
+
+// 4:3 classic | 20×15 tiles | 640×480 | 32bits
+constexpr int g_xTiles = 20;
+constexpr int g_yTiles = 15;
+
+struct TileMapCode {
+    std::array<std::array<std::uint8_t, g_xTiles>&, g_yTiles> code;
+};
 
 /**
 * @brief Representa um mapa de blocos 2D que pode ser renderizado com eficiência.
 */
 class TileMap : public sf::Drawable, public sf::Transformable {
-    sf::VertexArray m_vertices;
-    sf::Texture m_tileset;
-    std::vector<std::vector<int>> m_matrixTiles;
+    sf::VertexArray background;
+    sf::Texture textureSet;
 
 public:
 /**
@@ -19,8 +28,7 @@ public:
 * @param matrixTiles Matriz 2D de índices de blocos.
 * @return True se o carregamento foi bem-sucedido.
 */
-    bool load(const std::string& fileName, sf::Vector2u tileSize, 
-              const std::vector<std::vector<int>>& matrixTiles);
+    bool load(const std::string& fileName, const TileMapCode& tileCodeMatrix);
 
 private:
     // Override from SFML drawable class
