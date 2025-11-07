@@ -22,12 +22,13 @@ Button::Button() {
 sf::Sprite& Button::getSprite() {
     switch (this->selectedButton)
     {
-    case PLAY:
-        return this->play;
     case NEW_GAME:
         return this->newGame;
     case SETTINGS:
         return this->settings;
+    // COUNT will return play sprite too
+    default:
+        return this->play;
     }
 }
 
@@ -39,6 +40,7 @@ void Button::next() {
 void Button::previous() {
     int prev = (static_cast<int>(selectedButton) - 1 + static_cast<int>(SelectedMenuButton::COUNT))
                % static_cast<int>(SelectedMenuButton::COUNT);
+    selectedButton = static_cast<SelectedMenuButton>(prev);
 }
 
 SelectedMenuButton Button::getButton() {
