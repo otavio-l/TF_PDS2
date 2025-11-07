@@ -14,7 +14,8 @@ class InputSystem {
     Direction direction;
 public:
     void contiunuousAction(sf::Event& event);
-    void updateVelocity(EntityManager& entities);
+    // To update main character position it has to see the direction flags
+    void updateUserPosition(EntityManager& entities);
 };
 
 #endif

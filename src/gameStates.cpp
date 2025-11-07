@@ -43,7 +43,7 @@ void PausedState::handleInput(sf::Event& event) {
 void MenuState::update(float dt) {}
 void PlayState::update(float dt) {
     // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
-    inputSystem.updateVelocity(entities);
+    inputSystem.updateUserPosition(entities);
     // TODO: if (...) changeBackground(..., resourceManager)
 }
 void PausedState::update(float dt) {}
