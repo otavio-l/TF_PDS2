@@ -1,14 +1,13 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
-
 #include <memory>
+#include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
 #include "entityManager.hpp"
 #include "systemsEntities.hpp"
 #include "tilemaps.hpp"
 
-#include <SFML/Graphics.hpp>
 
 class Game;
 

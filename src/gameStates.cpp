@@ -48,7 +48,8 @@ SelectedMenuButton Button::getButton() {
 
 
 MenuState::MenuState(Game &game) : GameState(game) {
-    // TODO: resources.loadTexture();
+    // TODO: resources.loadTexture("menu.jpg");
+    // this->background.setTexture("menu.jpg");
 }
 PlayState::PlayState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
@@ -70,6 +71,15 @@ void GameState::handleInput(sf::Event& event)  {
 
 void MenuState::handleInput(sf::Event& event) {
     GameState::handleInput(event);
+    if (event.type == sf::Event::KeyPressed) {
+        if (event.key.code == sf::Keyboard::Enter) {
+            if (button.getButton() == SelectedMenuButton::PLAY) {
+                game.changeGameState(std::unique_ptr<PlayState>(new PlayState(game)));
+            }
+        }
+        else if (event.key.code == sf::Keyboard::Down) button.next();
+        else if (event.key.code == sf::Keyboard::Up) button.previous();
+    }
 }
 
 void PlayState::handleInput(sf::Event& event) {
@@ -103,7 +113,10 @@ void PlayState::update(float dt) {
 void PausedState::update(float dt) {}
 
 
-void MenuState::render(sf::RenderWindow& window) {}
+void MenuState::render(sf::RenderWindow& window) {
+    window.draw(this->background);
+    window.draw(this->button.getSprite());
+}
 void PlayState::render(sf::RenderWindow& window) {
     window.draw(*this->background);
 }
