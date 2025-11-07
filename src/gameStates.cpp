@@ -16,13 +16,18 @@ PausedState::PausedState(Game &game) : GameState(game) {
 
 void GameState::handleInput(sf::Event& event)  {
     if (event.type == sf::Event::Closed) {
-        // TODO: Close
+        game.window.close();
+        exit(EXIT_SUCCESS);
     }
 }
 
-void MenuState::handleInput(sf::Event& event) {}
+void MenuState::handleInput(sf::Event& event) {
+    GameState::handleInput(event);
+}
 
 void PlayState::handleInput(sf::Event& event) {
+    GameState::handleInput(event);
+    
     // ACTION WITH INTERVALS (shoot)
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape)
@@ -35,6 +40,8 @@ void PlayState::handleInput(sf::Event& event) {
 }
 
 void PausedState::handleInput(sf::Event& event) {
+    GameState::handleInput(event);
+
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
         game.changeGameState(std::unique_ptr<PlayState>(new PlayState(game)));
 }

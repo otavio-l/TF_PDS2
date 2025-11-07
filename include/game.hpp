@@ -13,10 +13,11 @@
 * Lida com a criação de janelas, atualizações de estado, entrada e renderização.
 */
 class Game {
-    sf::RenderWindow window;
+    // sf::RenderWindow window;
     //SMART POINTER: quando currentState for ser esquecida (saiu do escopo), chama delete para o obj
     std::unique_ptr<GameState> currentState;
 public:
+    sf::RenderWindow window;
 //! Inicializa o jogo e cria a janela principal.
     Game();
 //! Executa o loop principal do jogo.
