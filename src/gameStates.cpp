@@ -1,4 +1,5 @@
 #include "gameStates.hpp"
+#include "game.hpp"
 
 MenuState::MenuState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
@@ -27,7 +28,7 @@ void MenuState::handleInput(sf::Event& event) {
 
 void PlayState::handleInput(sf::Event& event) {
     GameState::handleInput(event);
-    
+
     // ACTION WITH INTERVALS (shoot)
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape)

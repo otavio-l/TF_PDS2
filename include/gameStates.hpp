@@ -3,13 +3,15 @@
 
 
 #include <memory>
-#include "game.hpp"
 #include "resourceManager.hpp"
 #include "entityManager.hpp"
 #include "systemsEntities.hpp"
 #include "tilemaps.hpp"
 
 #include <SFML/Graphics.hpp>
+
+class Game;
+
 /**
 * @brief Classe base abstrata para diferentes estados do jogo.
 * 
