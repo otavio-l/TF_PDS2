@@ -21,8 +21,7 @@ TEST_CASE("Game::run") {
 // como um getCurrentState() ajudaria nisso
 TEST_CASE("Game::changeGameState") {
     Game game;
-    std::unique_ptr<GameState> statePtr = std::make_unique<PlayState>(game);
 
-    game.changeGameState(std::move(statePtr)); // move o unique_ptr
+    game.changeGameState(std::unique_ptr<GameState>(new MenuState(game)));
     CHECK(true);
 }
