@@ -16,3 +16,14 @@ void InputSystem::contiunuousAction(sf::Event& event) {
         if (event.key.code == sf::Keyboard::D) direction.right = false;
     }
 }
+
+void InputSystem::updateUserPosition(EntityManager& entities) {
+    // TODO:
+    // Entity entity = entities.withComponent<PlayerTag>
+    // Velocity vel = entity.get(Velocity);
+    // Position& pos = entity.get(Position)
+    // if (direction.up) pos.y -= vel;
+    // if (direction.down) pos.y += vel;
+    // if (direction.right) pos.x += vel;
+    // if (direction.left) pos.x -= vel;
+}
