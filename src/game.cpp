@@ -1,14 +1,10 @@
 #include "game.hpp"
-
-
-constexpr int g_xPixels = 800;
-constexpr int g_yPixels = 600;
-constexpr int fps = 60;
+#include "constants.hpp"
 
 
 Game::Game() {
-    window.create(sf::VideoMode(g_xPixels, g_yPixels), "Game");
-    window.setFramerateLimit(fps);
+    window.create(sf::VideoMode(constants::xPixels, constants::yPixels), "Game");
+    window.setFramerateLimit(constants::fps);
     //make_unique is available on c++17 forward
     this->currentState = std::unique_ptr<MenuState>(new MenuState(*this));
 }

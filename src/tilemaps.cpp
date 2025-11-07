@@ -1,21 +1,22 @@
 #include "tilemaps.hpp"
+#include "constants.hpp"
 
-constexpr int tileSizeBits = 32;
 
 TileMap::TileMap(const std::string& tileset, const TileMapCode& tileCodeMatrix, 
     ResourceManager& resourceManager) {
     this->textureSet = resourceManager.getTexture(tileset);
 
     this->background.setPrimitiveType(sf::Quads);
-    this->background.resize(g_xTiles * g_yTiles * 4);
+    this->background.resize(constants::xTiles * constants::yTiles * 4);
 
-    for (unsigned i = 0; i < g_xTiles; ++i)
-        for (unsigned j = 0; j < g_yTiles; ++j) {
+    using constants::tileSizeBits;
+    for (unsigned i = 0; i < constants::xTiles; ++i)
+        for (unsigned j = 0; j < constants::yTiles; ++j) {
             unsigned int tileCode = tileCodeMatrix[j][i];
             unsigned int rowTexture = tileCode % (this->textureSet.getSize().x / tileSizeBits);
             unsigned int colTexture = tileCode / (this->textureSet.getSize().x / tileSizeBits);
 
-            sf::Vertex* firstVerticeSquare = &this->background[(i + j * g_xTiles) * 4];
+            sf::Vertex* firstVerticeSquare = &this->background[(i + j * constants::xTiles) * 4];
             firstVerticeSquare[0].position = sf::Vector2f((float)i * tileSizeBits, (float)j * tileSizeBits);
             firstVerticeSquare[1].position = sf::Vector2f((float)(i + 1) * tileSizeBits, (float)j * tileSizeBits);
             firstVerticeSquare[2].position = sf::Vector2f((float)(i + 1) * tileSizeBits, (float)(j + 1) * tileSizeBits);

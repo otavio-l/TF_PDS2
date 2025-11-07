@@ -5,13 +5,11 @@
 #include <cstdint>
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
+#include "constants.hpp"
 
 
-// 4:3 classic | 20×15 tiles | 640×480 | 32bits
-constexpr int g_xTiles = 20;
-constexpr int g_yTiles = 15;
+using TileMapCode = std::array<std::array<std::uint8_t, constants::xTiles>, constants::yTiles>;
 
-using TileMapCode = std::array<std::array<std::uint8_t, g_xTiles>, g_yTiles>;
 
 /**
 * @brief Representa um mapa de blocos 2D que pode ser renderizado com eficiência.
