@@ -7,7 +7,7 @@ constexpr int fps = 60;
 
 
 Game::Game() {
-    window.create(sf::VideoMode(g_xPixels, g_xPixels), "Game");
+    window.create(sf::VideoMode(g_xPixels, g_yPixels), "Game");
     window.setFramerateLimit(fps);
     //make_unique is available on c++17 forward
     this->currentState = std::unique_ptr<MenuState>(new MenuState(*this));
