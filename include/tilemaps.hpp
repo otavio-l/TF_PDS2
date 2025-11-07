@@ -11,7 +11,7 @@
 constexpr int g_xTiles = 20;
 constexpr int g_yTiles = 15;
 
-using TileMapCode = std::array<std::array<std::uint8_t, g_xTiles>&, g_yTiles>;
+using TileMapCode = std::array<std::array<std::uint8_t, g_xTiles>, g_yTiles>;
 
 /**
 * @brief Representa um mapa de blocos 2D que pode ser renderizado com eficiência.
