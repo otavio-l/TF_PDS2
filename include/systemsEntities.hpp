@@ -3,7 +3,7 @@
 
 #include "entityManager.hpp"
 
-typedef struct Direction {
+struct Direction {
     bool up;
     bool down;
     bool right;
