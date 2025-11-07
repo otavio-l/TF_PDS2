@@ -1,6 +1,52 @@
 #include "gameStates.hpp"
 #include "game.hpp"
 
+
+Button::Button() {
+    this->selectedButton = PLAY;
+    // TODO:
+    // resources.loadTexture("buttonPlay.jpg");
+    // resources.loadTexture("buttonNew.jpg");
+    // resources.loadTexture("buttonSettings.jpg");
+
+    // this->play.setTexture("buttonPlay.jpg");
+    // this->newGame.setTexture("buttonNew.jpg");
+    // this->settings.setTexture("buttonSettings.jpg");
+
+    // this->play.setPosition({1.0f, 2.0f});
+    // this->newGame.setPosition({1.0f, 3.0f});
+    // this->settings.setPosition({1.0f, 4.0f});
+
+}
+
+sf::Sprite& Button::getSprite() {
+    switch (this->selectedButton)
+    {
+    case PLAY:
+        return this->play;
+    case NEW_GAME:
+        return this->newGame;
+    case SETTINGS:
+        return this->settings;
+    }
+}
+
+void Button::next() {
+    int next = (static_cast<int>(selectedButton) + 1) % static_cast<int>(SelectedMenuButton::COUNT);
+    selectedButton = static_cast<SelectedMenuButton>(next);
+}
+
+void Button::previous() {
+    int prev = (static_cast<int>(selectedButton) - 1 + static_cast<int>(SelectedMenuButton::COUNT))
+               % static_cast<int>(SelectedMenuButton::COUNT);
+}
+
+SelectedMenuButton Button::getButton() {
+    return this->selectedButton;
+}
+
+
+
 MenuState::MenuState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
 }

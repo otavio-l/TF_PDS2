@@ -12,6 +12,28 @@
 
 class Game;
 
+
+enum SelectedMenuButton {
+    PLAY,
+    NEW_GAME,
+    SETTINGS,
+    COUNT
+};
+
+struct Button {
+    sf::Sprite play;
+    sf::Sprite newGame;
+    sf::Sprite settings;
+    Button();
+    sf::Sprite& getSprite();
+    void next();
+    void previous();
+    SelectedMenuButton getButton();
+private:
+    SelectedMenuButton selectedButton;
+};
+
+
 /**
 * @brief Classe base abstrata para diferentes estados do jogo.
 * 
@@ -36,6 +58,8 @@ public:
 
 //! Representa o estado do menu principal.
 class MenuState : public GameState {
+    sf::Sprite background;
+    Button button;
 public:
     MenuState(Game &game);
     void handleInput(sf::Event& event) override;
