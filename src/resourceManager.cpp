@@ -1,13 +1,13 @@
 #include "resourceManager.hpp"
 
-void ResourceManager::loadTexture(const std::string& name, const std::string& filename) {
+void ResourceManager::loadTexture(const std::string& filename) {
     sf::Texture texture;
-    if (!texture.loadFromFile(filename))
-        throw std::runtime_error("Failed to load " + filename);
+    if (!texture.loadFromFile("assets/" + filename + ".jpg"))
+        throw std::runtime_error("Failed to load: " + filename);
 
-    textures[name] = std::move(texture);
+    textures[filename] = std::move(texture);
 }
 
-sf::Texture& ResourceManager::getTexture(const std::string& name) {
-    return textures.at(name);
+sf::Texture& ResourceManager::getTexture(const std::string& filename) {
+    return textures.at(filename);
 }

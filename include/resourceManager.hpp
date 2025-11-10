@@ -20,7 +20,7 @@ public:
 * @param name Identificador da textura.
 * @param filename Caminho para o arquivo.
 */
-    void loadTexture(const std::string& name, const std::string& filename);
+    void loadTexture(const std::string& filename);
 /**
 * @brief Retorna uma textura carregada anteriormente.
 * @param name Identificador da textura.
