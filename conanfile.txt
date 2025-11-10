@@ -1,6 +1,7 @@
 [requires]
 sfml/2.6.1
 doxygen/1.14.0
+nlohmann_json/3.12.0
 
 [generators]
 PkgConfigDeps

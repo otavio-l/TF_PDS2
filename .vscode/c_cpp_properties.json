@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "~/.conan2/p/b/sfmlf79c0a1dab46b/p/include",
+                "~/.conan2/p/nlohmd014ef7748f4b/p/include/",
                 "/usr/include",
                 "/usr/local/include"
             ],
