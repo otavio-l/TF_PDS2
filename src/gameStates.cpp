@@ -58,7 +58,7 @@ MenuState::MenuState(Game &game) : GameState(game) {
     // this->background.setTexture("menu.jpg");
 }
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources), 
-inputSystem(mapArea, mainCharacter) {
+inputSystem(mainCharacter) {
     // TODO: resources.loadTexture();
     
     mainCharacter.hasCollision = true;
@@ -119,7 +119,7 @@ void PausedState::handleInput(sf::Event& event) {
 void MenuState::update(float dt) {}
 void PlayState::update(float dt) {
     // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
-    inputSystem.updateUserPosition(mapArea.mapEntities);
+    inputSystem.updateUserPosition(mapArea);
 }
 void PausedState::update(float dt) {}
 

@@ -12,10 +12,9 @@ struct Direction {
 
 class InputSystem {
     Direction direction;
-    MapArea &mapArea;
     Entity& mainCharacter;
 public:
-    InputSystem(MapArea &mapArea, Entity& mainCharacter);
+    InputSystem(Entity& mainCharacter);
 
     void contiunuousAction(sf::Event& event);
 
@@ -24,7 +23,7 @@ public:
     void moveEntity(float dx, float dy);
 
     // To update main character position it has to see the direction flags
-    void updateUserPosition(std::vector<Entity>& mapEntities);
+    void updateUserPosition(MapArea& mapArea);
 };
 
 #endif

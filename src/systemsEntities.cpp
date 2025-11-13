@@ -54,14 +54,14 @@ void InputSystem::moveEntity(float dx, float dy) {
 }
 
 
-void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
+void InputSystem::updateUserPosition(MapArea& mapArea) {
     bool collisionUp{false};
     bool collisionRight{false};
     bool collisionDown{false};
     bool collisionLeft{false};
 
-    for (std::size_t i = 0; i < mapEntities.size(); ++i) {
-        auto& e = mapEntities[i];
+    for (std::size_t i = 0; i < mapArea.mapEntities.size(); ++i) {
+        auto& e = mapArea.mapEntities[i];
         // some areas of the map have the background entity, which has no collision or trigger
         if (!e.hasCollision && !e.hasTrigger) continue;
 
@@ -73,7 +73,7 @@ void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
                 }
             }
             else {
-                if (!collisionUp && (i == mapEntities.size() - 1)) {
+                if (!collisionUp && (i == mapArea.mapEntities.size() - 1)) {
                     moveEntity(0, -constants::mainCharacterVelocity);
                 }
             }
@@ -86,7 +86,7 @@ void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
                 }
             }
             else {
-                if (!collisionRight && (i == mapEntities.size() - 1)) {
+                if (!collisionRight && (i == mapArea.mapEntities.size() - 1)) {
                     moveEntity(constants::mainCharacterVelocity, 0);
                 }
             } 
@@ -99,7 +99,7 @@ void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
                 }
             }
             else {
-                if (!collisionDown && (i == mapEntities.size() - 1)) {
+                if (!collisionDown && (i == mapArea.mapEntities.size() - 1)) {
                     moveEntity(0, constants::mainCharacterVelocity);
                 }
             }
@@ -112,7 +112,7 @@ void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
                 }
             }
             else {
-                if (!collisionLeft && (i == mapEntities.size() - 1)) {
+                if (!collisionLeft && (i == mapArea.mapEntities.size() - 1)) {
                     moveEntity(-constants::mainCharacterVelocity, 0);
                 }
             }
