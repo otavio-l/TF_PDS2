@@ -56,48 +56,66 @@ void InputSystem::moveEntity(float dx, float dy) {
 
 
 void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
-    for (auto& e : mapEntities) {
+    bool collisionUp{false};
+    bool collisionRight{false};
+    bool collisionDown{false};
+    bool collisionLeft{false};
+
+    for (std::size_t i = 0; i < mapEntities.size(); ++i) {
+        auto& e = mapEntities[i];
         // some areas of the map have the background entity, which has no collision or trigger
-        if (!e.hasCollision && !e.hasTrigger) return;
+        if (!e.hasCollision && !e.hasTrigger) continue;
 
         if (direction.up) {
-            if (checkCollision(e, 0, -constants::mainCharacterVelocity)) {                
+            if (checkCollision(e, 0, -constants::mainCharacterVelocity)) { 
+                collisionUp = true;               
                 if (e.hasTrigger) {
                     // TODO: trigger
                 }
             }
             else {
-                moveEntity(0, -constants::mainCharacterVelocity);
+                if (!collisionUp && (i == mapEntities.size() - 1)) {
+                    moveEntity(0, -constants::mainCharacterVelocity);
+                }
             }
         }
         if (direction.right) {
             if (checkCollision(e, constants::mainCharacterVelocity, 0)) {
+                collisionRight = true;
                 if (e.hasTrigger) {
                     // TODO: trigger
                 }
             }
             else {
-                moveEntity(constants::mainCharacterVelocity, 0);
+                if (!collisionRight && (i == mapEntities.size() - 1)) {
+                    moveEntity(constants::mainCharacterVelocity, 0);
+                }
             } 
         }
         if (direction.down) {
             if (checkCollision(e, 0, constants::mainCharacterVelocity)) {                
+                collisionDown = true;
                 if (e.hasTrigger) {
                     // TODO: trigger
                 }
             }
             else {
-                moveEntity(0, constants::mainCharacterVelocity);
+                if (!collisionDown && (i == mapEntities.size() - 1)) {
+                    moveEntity(0, constants::mainCharacterVelocity);
+                }
             }
         }
         if (direction.left) {
             if (checkCollision(e, -constants::mainCharacterVelocity, 0)) {
+                collisionLeft = true;
                 if (e.hasTrigger) {
                     // TODO: trigger
                 }
             }
             else {
-                moveEntity(-constants::mainCharacterVelocity, 0);
+                if (!collisionLeft && (i == mapEntities.size() - 1)) {
+                    moveEntity(-constants::mainCharacterVelocity, 0);
+                }
             }
         }
     }
