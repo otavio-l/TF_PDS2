@@ -1,5 +1,15 @@
 #include "systemsEntities.hpp"
-#include "entityManager.hpp"
+#include "constants.hpp"
+
+
+InputSystem::InputSystem(MapArea &mapArea, Entity& mainCharacter) : mapArea(mapArea), 
+mainCharacter(mainCharacter) {
+    direction.down = false;
+    direction.left = false;
+    direction.right = false;
+    direction.down = false;
+}
+
 
 void InputSystem::contiunuousAction(sf::Event& event) {    
     // Main character movement
