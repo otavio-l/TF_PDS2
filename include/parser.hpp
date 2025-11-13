@@ -7,6 +7,13 @@
 #include "resourceManager.hpp"
 
 
+struct Trigger {
+    std::string type;
+    std::string targetMap;
+    std::string targetSpawn;
+};
+
+
 struct Entity {
     sf::Sprite drawable;
     // sf::FloatRect hitbox;
@@ -14,8 +21,7 @@ struct Entity {
     bool hasCollision;
     bool hasTrigger;
     bool hasTexture;
-    std::string targetMap;
-    std::string targetSpawn;
+    Trigger trigger;
 };
 
 

@@ -55,25 +55,29 @@ void MapArea::loadmapEntities() {
 
     for (const auto& e : mapData["mapEntities"]) {
         Entity ent;
-        
-        float x = e.value("x", 0.0f);
-        float y = e.value("y", 0.0f);
-        ent.drawable.setPosition(x, y);
 
-        ent.hasTexture = e.value("hastTexture", true);
-        std::string texture = e.value("texture", "");
-        if (!texture.empty()) {
-            assert (ent.hasTexture);
+        ent.hasTexture = e.contains("sprite");
+        if (ent.hasTexture) {
+            const auto& sp = e["sprite"];
+            float x = sp.value("x", 0.0f);
+            float y = sp.value("y", 0.0f);
+            ent.drawable.setPosition(x, y);
+
+            std::string texture = sp.value("texture", "");
             sf::Texture& t = rM.getTexture(texture);
             ent.drawable.setTexture(t);
         }
-        ent.hasTrigger = e.value("trigger", false);
-        ent.targetMap = e.value("targetMap", "");
-        ent.targetSpawn = e.value("targetSpawn", "");
+        
+        ent.hasTrigger = e.contains("trigger");
+        if (ent.hasTrigger) {
+            const auto& tr = e["trigger"];
+            ent.trigger.type = tr.value("type", "");
+            ent.trigger.targetMap = tr.value("targetMap", "");
+            ent.trigger.targetSpawn = tr.value("targetSpawn", "");
+        }
 
-        ent.hasCollision = e.value("hasCollision", true);
-        if (e.contains("hitbox")) {
-            assert (ent.hasCollision);
+        ent.hasCollision = e.contains("hitbox");
+        if (ent.hasCollision) {
 
             const auto& hb = e["hitbox"];
             float left = hb.value("x", 0.0f);
