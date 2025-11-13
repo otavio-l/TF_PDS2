@@ -2,9 +2,8 @@
 #include "constants.hpp"
 
 
-InputSystem::InputSystem(MapArea &mapArea, Entity& mainCharacter) : mapArea(mapArea), 
-mainCharacter(mainCharacter) {
-    direction.down = false;
+InputSystem::InputSystem(Entity& mainCharacter) : mainCharacter(mainCharacter) {
+    direction.up = false;
     direction.left = false;
     direction.right = false;
     direction.down = false;
