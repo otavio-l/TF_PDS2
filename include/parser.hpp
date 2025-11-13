@@ -1,0 +1,44 @@
+#ifndef PARSER_HPP
+#define PARSER_HPP
+
+#include <string>
+#include <nlohmann/json.hpp>
+#include <SFML/Graphics.hpp>
+#include "resourceManager.hpp"
+
+
+struct Entity {
+    sf::Sprite drawable;
+    // sf::FloatRect hitbox;
+    sf::RectangleShape hitbox;
+    bool hasCollision;
+    bool hasTrigger;
+    bool hasTexture;
+    std::string targetMap;
+    std::string targetSpawn;
+};
+
+
+class MapArea {
+public:
+    // std::string jsonFile;
+    nlohmann::json mapData;
+    std::vector<Entity> mapEntities;
+    ResourceManager &rM;
+    // std::string currentSpawn;
+    Entity &mainCharacter;
+
+    MapArea(Entity &mainCharacter, ResourceManager &rM);
+
+    void newMap(std::string jsonFile, std::string currentSpawn);
+
+    void loadJson(std::string jsonFile);
+
+    void loadCurrentSpawn(std::string targetSpawn);
+
+    void loadBackground();
+
+    void loadmapEntities();
+};
+
+#endif
