@@ -27,13 +27,78 @@ void InputSystem::contiunuousAction(sf::Event& event) {
     }
 }
 
-void InputSystem::updateUserPosition(EntityManager& entities) {
-    // TODO:
-    // Entity entity = entities.withComponent<PlayerTag>
-    // Velocity vel = entity.get(Velocity);
-    // Position& pos = entity.get(Position)
-    // if (direction.up) pos.y -= vel;
-    // if (direction.down) pos.y += vel;
-    // if (direction.right) pos.x += vel;
-    // if (direction.left) pos.x -= vel;
+bool InputSystem::checkCollision(Entity& e, float dx, float dy) {
+    sf::FloatRect eHitbox = e.hitbox.getGlobalBounds();
+    sf::FloatRect eMain { 
+        mainCharacter.hitbox.getPosition().x + dx,
+        mainCharacter.hitbox.getPosition().y + dy,
+        mainCharacter.hitbox.getSize().x,
+        mainCharacter.hitbox.getSize().y
+    };
+
+    return eMain.intersects(eHitbox);
+}
+
+void InputSystem::moveEntity(float dx, float dy) {
+    sf::Vector2f spritePos {
+        mainCharacter.drawable.getPosition().x + dx,
+        mainCharacter.drawable.getPosition().y + dy
+    };
+
+    sf::Vector2f hitboxPos {
+        mainCharacter.hitbox.getPosition().x + dx,
+        mainCharacter.hitbox.getPosition().y + dy
+    };
+
+    mainCharacter.drawable.setPosition(spritePos);
+    mainCharacter.hitbox.setPosition(hitboxPos);
+}
+
+
+void InputSystem::updateUserPosition(std::vector<Entity>& mapEntities) {
+    for (auto& e : mapEntities) {
+        // some areas of the map have the background entity, which has no collision or trigger
+        if (!e.hasCollision && !e.hasTrigger) return;
+
+        if (direction.up) {
+            if (checkCollision(e, 0, -constants::mainCharacterVelocity)) {                
+                if (e.hasTrigger) {
+                    // TODO: trigger
+                }
+            }
+            else {
+                moveEntity(0, -constants::mainCharacterVelocity);
+            }
+        }
+        if (direction.right) {
+            if (checkCollision(e, constants::mainCharacterVelocity, 0)) {
+                if (e.hasTrigger) {
+                    // TODO: trigger
+                }
+            }
+            else {
+                moveEntity(constants::mainCharacterVelocity, 0);
+            } 
+        }
+        if (direction.down) {
+            if (checkCollision(e, 0, constants::mainCharacterVelocity)) {                
+                if (e.hasTrigger) {
+                    // TODO: trigger
+                }
+            }
+            else {
+                moveEntity(0, constants::mainCharacterVelocity);
+            }
+        }
+        if (direction.left) {
+            if (checkCollision(e, -constants::mainCharacterVelocity, 0)) {
+                if (e.hasTrigger) {
+                    // TODO: trigger
+                }
+            }
+            else {
+                moveEntity(-constants::mainCharacterVelocity, 0);
+            }
+        }
+    }
 }
