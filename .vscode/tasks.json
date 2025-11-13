@@ -7,7 +7,7 @@
             "command": "/bin/bash",
             "args": [
                 "-c",
-                "/usr/bin/g++ -Iinclude -g -Wall -Wextra -Wconversion -Wsign-conversion -Werror -Wno-unused-parameter -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_gdb $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics sfml-window sfml-audio sfml-system nlohmann_json)"
+                "/usr/bin/g++ -Iinclude -g -O0 -Wall -Wextra -Wconversion -Wsign-conversion -Werror -Wno-unused-parameter -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_gdb $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics sfml-window sfml-audio sfml-system nlohmann_json)"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -22,7 +22,7 @@
             "command": "/bin/bash",
             "args": [
                 "-c",
-                "/usr/bin/g++ -Iinclude -g -O1 -fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Wconversion -Wsign-conversion -Werror -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_asan $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics  sfml-window sfml-audio sfml-system nlohmann_json)"
+                "/usr/bin/g++ -Iinclude -g -O0 -fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Wconversion -Wsign-conversion -Werror -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_asan $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics  sfml-window sfml-audio sfml-system nlohmann_json)"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
