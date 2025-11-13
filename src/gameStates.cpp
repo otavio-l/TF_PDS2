@@ -1,5 +1,9 @@
+#define DEBUG
+
+
 #include "gameStates.hpp"
 #include "game.hpp"
+#include "constants.hpp"
 
 
 Button::Button() {
@@ -53,11 +57,17 @@ MenuState::MenuState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture("menu.jpg");
     // this->background.setTexture("menu.jpg");
 }
-PlayState::PlayState(Game &game) : GameState(game) {
+PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources), 
+inputSystem(mapArea, mainCharacter) {
     // TODO: resources.loadTexture();
-    // TODO: Entity player = entities.createEntity();
-    // TODO: entities.addComponent<Position>(player, {100.f, 200.f});
-    // TODO: if( !tilemap.load(...) );
+    
+    mainCharacter.hasCollision = true;
+    mainCharacter.hasTexture = true;
+    // TODO: mainCharacter.drawable.
+    mainCharacter.hitbox.setPosition(100.0f, 80.0f);
+    mainCharacter.hitbox.setSize({constants::mainWidth, constants::mainHeight});
+
+    mapArea.newMap("maps/home.json", "right");
 }
 PausedState::PausedState(Game &game) : GameState(game) {
     // TODO: resources.loadTexture();
@@ -109,8 +119,7 @@ void PausedState::handleInput(sf::Event& event) {
 void MenuState::update(float dt) {}
 void PlayState::update(float dt) {
     // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
-    inputSystem.updateUserPosition(entities);
-    // TODO: if (...) changeBackground(..., resourceManager)
+    inputSystem.updateUserPosition(mapArea.mapEntities);
 }
 void PausedState::update(float dt) {}
 
@@ -120,11 +129,13 @@ void MenuState::render(sf::RenderWindow& window) {
     window.draw(this->button.getSprite());
 }
 void PlayState::render(sf::RenderWindow& window) {
-    window.draw(*this->background);
+#ifdef DEBUG
+    window.draw(mainCharacter.hitbox);
+    for (auto& e : mapArea.mapEntities) {
+        if (e.hasCollision) {
+            window.draw(e.hitbox);
+        }
+    }
+#endif
 }
 void PausedState::render(sf::RenderWindow& window) {}
-
-
-void PlayState::changeBackground(std::unique_ptr<TileMap> newBackground) {
-    this->background = std::move(newBackground);
-}

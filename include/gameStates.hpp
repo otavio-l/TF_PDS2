@@ -4,9 +4,8 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
-#include "entityManager.hpp"
 #include "systemsEntities.hpp"
-#include "tilemaps.hpp"
+#include "parser.hpp"
 
 
 class Game;
@@ -68,16 +67,14 @@ public:
 
 //! Representa o estado do jogo.
 class PlayState : public GameState {
-    EntityManager entities;
+    Entity mainCharacter;
+    MapArea mapArea;
     InputSystem inputSystem;
-    std::unique_ptr<TileMap> background;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
-
-    void changeBackground(std::unique_ptr<TileMap> newBackground);
 };
 
 //! Representa o estado de pausa.
