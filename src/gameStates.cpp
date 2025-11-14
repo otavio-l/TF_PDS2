@@ -6,23 +6,6 @@
 #include "constants.hpp"
 
 
-Button::Button() {
-    this->selectedButton = PLAY;
-    // TODO:
-    // resources.loadTexture("buttonPlay.jpg");
-    // resources.loadTexture("buttonNew.jpg");
-    // resources.loadTexture("buttonSettings.jpg");
-
-    // this->play.setTexture("buttonPlay.jpg");
-    // this->newGame.setTexture("buttonNew.jpg");
-    // this->settings.setTexture("buttonSettings.jpg");
-
-    // this->play.setPosition({1.0f, 2.0f});
-    // this->newGame.setPosition({1.0f, 3.0f});
-    // this->settings.setPosition({1.0f, 4.0f});
-
-}
-
 sf::Sprite& Button::getSprite() {
     switch (this->selectedButton)
     {
@@ -52,10 +35,16 @@ SelectedMenuButton Button::getButton() {
 }
 
 
-
 MenuState::MenuState(Game &game) : GameState(game) {
-    // TODO: resources.loadTexture("menu.jpg");
-    // this->background.setTexture("menu.jpg");
+    resources.loadTexture("menuPlay");
+    resources.loadTexture("menuNew");
+    resources.loadTexture("menuSettings");
+
+    button.play.setTexture(resources.getTexture("menuPlay"));
+    button.newGame.setTexture(resources.getTexture("menuNew"));
+    button.settings.setTexture(resources.getTexture("menuSettings"));
+
+    button.selectedButton = PLAY;
 }
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources), 
 inputSystem(mainCharacter) {
@@ -125,7 +114,6 @@ void PausedState::update(float dt) {}
 
 
 void MenuState::render(sf::RenderWindow& window) {
-    window.draw(this->background);
     window.draw(this->button.getSprite());
 }
 void PlayState::render(sf::RenderWindow& window) {

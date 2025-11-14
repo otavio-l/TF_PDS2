@@ -22,12 +22,10 @@ struct Button {
     sf::Sprite play;
     sf::Sprite newGame;
     sf::Sprite settings;
-    Button();
     sf::Sprite& getSprite();
     void next();
     void previous();
     SelectedMenuButton getButton();
-private:
     SelectedMenuButton selectedButton;
 };
 
