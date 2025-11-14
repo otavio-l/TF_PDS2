@@ -5,6 +5,8 @@
 Game::Game() {
     window.create(sf::VideoMode(constants::xPixels, constants::yPixels), "Game");
     window.setFramerateLimit(constants::fps);
+    sf::View view(sf::FloatRect(0, 0, constants::xLogicPixels, constants::yLogicPixels)); 
+    window.setView(view);
     //make_unique is available on c++17 forward
     this->currentState = std::unique_ptr<MenuState>(new MenuState(*this));
 }

@@ -1,0 +1,26 @@
+{
+    "type": "interior",
+    "spawn": {
+        "below-home": {"x": 50, "y": 101}
+    },
+    "mapEntities": [
+        {
+            "name": "home",
+            "hitbox": {
+                "x": 20,
+                "y": 20,
+                "width": 65,
+                "height": 80
+            }
+        },
+        {
+            "name": "tree",
+            "hitbox": {
+                "x": 170,
+                "y": 30,
+                "width": 2,
+                "height": 3
+            }
+        }
+    ]
+}

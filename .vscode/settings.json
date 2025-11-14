@@ -66,6 +66,14 @@
         "csignal": "cpp",
         "unordered_set": "cpp",
         "fstream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "any": "cpp",
+        "strstream": "cpp",
+        "codecvt": "cpp",
+        "forward_list": "cpp",
+        "ranges": "cpp",
+        "span": "cpp",
+        "cfenv": "cpp",
+        "valarray": "cpp"
     }
 }

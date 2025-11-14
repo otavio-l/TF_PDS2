@@ -4,7 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/include",
+                // For intellisense to work the path of the dependencies must be specified here
+                // $find ~/.conan2 -name Graphics.hpp
                 "~/.conan2/p/b/sfmlf79c0a1dab46b/p/include",
+                // $find ~/.conan2 -name json.hpp
                 "~/.conan2/p/nlohmd014ef7748f4b/p/include/",
                 "/usr/include",
                 "/usr/local/include"

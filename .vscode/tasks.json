@@ -2,34 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "C++ gdb BUILDER",
+            "label": "Build Game (make)",
             "type": "shell",
-            "command": "/bin/bash",
-            "args": [
-                "-c",
-                "/usr/bin/g++ -Iinclude -g -Wall -Wextra -Wconversion -Wsign-conversion -Werror -Wno-unused-parameter -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_gdb $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics sfml-window sfml-audio sfml-system nlohmann_json)"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
+            "command": "make",
             "problemMatcher": [
-                "$gcc"
-            ]
-        },
-        {
-            "label": "C++ ASAN BUILDER",
-            "type": "shell",
-            "command": "/bin/bash",
-            "args": [
-                "-c",
-                "/usr/bin/g++ -Iinclude -g -O1 -fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Wconversion -Wsign-conversion -Werror -std=c++11 -pedantic-errors -fdiagnostics-color=always ${workspaceFolder}/src/*.cpp -o ${workspaceFolder}/jogo_asan $(PKG_CONFIG_PATH=build pkg-config --cflags --libs sfml-graphics  sfml-window sfml-audio sfml-system nlohmann_json)"
+                "$gcc"   // enables inline VSCode error highlighting
             ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ]
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

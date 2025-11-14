@@ -2,28 +2,15 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "Lets debug",
+            "name": "make and debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/jogo_gdb",
+            "program": "${workspaceFolder}/game",
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
             "MIMode": "gdb",
-            "preLaunchTask": "C++ gdb BUILDER",
+            "preLaunchTask": "Build Game (make)",
             "miDebuggerPath": "/usr/bin/gdb"
         },
-        {
-            "name": "Run with ASAN (no gdb)",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/jogo_asan",
-            "cwd": "${workspaceFolder}",
-            "environment": [
-                { "name": "ASAN_OPTIONS", "value": "detect_leaks=1:verbosity=1" }
-            ],
-            "stopAtEntry": false,
-            "MIMode": "gdb",
-            "preLaunchTask": "C++ ASAN BUILDER"
-        }
     ]
 }

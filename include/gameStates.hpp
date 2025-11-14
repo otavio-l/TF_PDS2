@@ -4,9 +4,8 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
-#include "entityManager.hpp"
 #include "systemsEntities.hpp"
-#include "tilemaps.hpp"
+#include "parser.hpp"
 
 
 class Game;
@@ -23,12 +22,10 @@ struct Button {
     sf::Sprite play;
     sf::Sprite newGame;
     sf::Sprite settings;
-    Button();
     sf::Sprite& getSprite();
     void next();
     void previous();
     SelectedMenuButton getButton();
-private:
     SelectedMenuButton selectedButton;
 };
 
@@ -43,12 +40,12 @@ protected:
     Game& game;
     ResourceManager resources;
 public:
-    GameState(Game& game) : game(game) {};
+    GameState(Game& game);
 //! Manipula a entrada para este estado.
     virtual void handleInput(sf::Event& event) = 0;
     //! Atualiza a lógica do estado.
 //! @param dt Delta de tempo desde o último quadro.
-    virtual void update(float dt) = 0;
+    virtual void update(float dt);
     //! Renderiza o estado para a janela.
     virtual void render(sf::RenderWindow& window) = 0;
 
@@ -62,22 +59,19 @@ class MenuState : public GameState {
 public:
     MenuState(Game &game);
     void handleInput(sf::Event& event) override;
-    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
 
 //! Representa o estado do jogo.
 class PlayState : public GameState {
-    EntityManager entities;
+    Entity mainCharacter;
+    MapArea mapArea;
     InputSystem inputSystem;
-    std::unique_ptr<TileMap> background;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;
     void update(float dt) override;
     void render(sf::RenderWindow& window) override;
-
-    void changeBackground(std::unique_ptr<TileMap> newBackground);
 };
 
 //! Representa o estado de pausa.
@@ -85,7 +79,6 @@ class PausedState : public GameState {
 public:
     PausedState(Game &game);
     void handleInput(sf::Event& event) override;
-    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
 
