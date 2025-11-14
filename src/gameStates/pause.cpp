@@ -10,7 +10,7 @@ void PausedState::handleInput(sf::Event& event) {
     GameState::handleInput(event);
 
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
-        game.changeGameState(std::unique_ptr<PlayState>(new PlayState(game)));
+        game.action.type = PendingActionType::Pop;
 }
 
 void PausedState::render(sf::RenderWindow& window) {}

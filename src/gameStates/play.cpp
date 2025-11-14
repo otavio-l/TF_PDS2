@@ -24,9 +24,10 @@ void PlayState::handleInput(sf::Event& event) {
 
     // ACTION WITH INTERVALS (shoot)
     if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::Escape)
-            //make_unique is available on c++17 forward
-            game.changeGameState(std::unique_ptr<MenuState>(new MenuState(game)));
+        if (event.key.code == sf::Keyboard::Escape) {
+            game.action.type = PendingActionType::Push;
+            game.action.state = std::unique_ptr<PausedState>(new PausedState(game));
+        }
     }
 
     // ACTION WITHOUT INTERVALS (walk)
