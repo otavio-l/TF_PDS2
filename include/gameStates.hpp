@@ -40,12 +40,12 @@ protected:
     Game& game;
     ResourceManager resources;
 public:
-    GameState(Game& game) : game(game) {};
+    GameState(Game& game);
 //! Manipula a entrada para este estado.
     virtual void handleInput(sf::Event& event) = 0;
     //! Atualiza a lógica do estado.
 //! @param dt Delta de tempo desde o último quadro.
-    virtual void update(float dt) = 0;
+    virtual void update(float dt);
     //! Renderiza o estado para a janela.
     virtual void render(sf::RenderWindow& window) = 0;
 
@@ -59,7 +59,6 @@ class MenuState : public GameState {
 public:
     MenuState(Game &game);
     void handleInput(sf::Event& event) override;
-    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
 
@@ -80,7 +79,6 @@ class PausedState : public GameState {
 public:
     PausedState(Game &game);
     void handleInput(sf::Event& event) override;
-    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
 
