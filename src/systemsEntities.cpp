@@ -68,8 +68,9 @@ void InputSystem::updateUserPosition(MapArea& mapArea) {
         if (direction.up) {
             if (checkCollision(e, 0, -constants::mainCharacterVelocity)) { 
                 collisionUp = true;               
-                if (e.hasTrigger) {
-                    // TODO: trigger
+                if (e.hasTrigger && e.trigger.type == "next-map") {
+                    mapArea.newMap(e.trigger.targetMap, e.trigger.targetSpawn);
+                    break;
                 }
             }
             else {
@@ -81,8 +82,9 @@ void InputSystem::updateUserPosition(MapArea& mapArea) {
         if (direction.right) {
             if (checkCollision(e, constants::mainCharacterVelocity, 0)) {
                 collisionRight = true;
-                if (e.hasTrigger) {
-                    // TODO: trigger
+                if (e.hasTrigger && e.trigger.type == "next-map") {
+                    mapArea.newMap(e.trigger.targetMap, e.trigger.targetSpawn);
+                    break;
                 }
             }
             else {
@@ -94,8 +96,9 @@ void InputSystem::updateUserPosition(MapArea& mapArea) {
         if (direction.down) {
             if (checkCollision(e, 0, constants::mainCharacterVelocity)) {                
                 collisionDown = true;
-                if (e.hasTrigger) {
-                    // TODO: trigger
+                if (e.hasTrigger && e.trigger.type == "next-map") {
+                    mapArea.newMap(e.trigger.targetMap, e.trigger.targetSpawn);
+                    break;
                 }
             }
             else {
@@ -107,8 +110,9 @@ void InputSystem::updateUserPosition(MapArea& mapArea) {
         if (direction.left) {
             if (checkCollision(e, -constants::mainCharacterVelocity, 0)) {
                 collisionLeft = true;
-                if (e.hasTrigger) {
-                    // TODO: trigger
+                if (e.hasTrigger && e.trigger.type == "next-map") {
+                    mapArea.newMap(e.trigger.targetMap, e.trigger.targetSpawn);
+                    break;
                 }
             }
             else {
