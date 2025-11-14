@@ -1,4 +1,3 @@
 /build/*
 !/build/.gitkeep
-/jogo_gdb
-/jogo_asan
+/game
