@@ -1,0 +1,72 @@
+{
+    "type": "interior",
+    "spawn": {
+        "right": {"x": 100, "y": 80}
+    },
+    "mapEntities": [
+        {
+            "name": "inferior-wall1",
+            "hitbox": {
+                "x": 20,
+                "y": 150,
+                "width": 66,
+                "height": 3
+            }
+        },
+        {
+            "name": "inferior-wall2",
+            "hitbox": {
+                "x": 106,
+                "y": 150,
+                "width": 66,
+                "height": 3
+            }
+        },
+        {
+            "name": "left-wall",
+            "x": 20,
+            "y": 10,
+            "hitbox": {
+                "x": 20,
+                "y": 10,
+                "width": 3,
+                "height": 140
+            }
+        },
+        {
+            "name": "right-wall",
+            "x": 169,
+            "y": 10,
+            "hitbox": {
+                "x": 169,
+                "y": 10,
+                "width": 3,
+                "height": 140
+            }
+        },
+        {
+            "name": "superior-wall",
+            "hitbox": {
+                "x": 20,
+                "y": 10,
+                "width": 152,
+                "height": 3
+            }
+        },
+        {
+            "name": "door",
+            "hitbox": {
+                "x": 86,
+                "y": 156,
+                "width": 20,
+                "height": 3
+            },
+            "trigger": {
+                "type": "next-map",
+                "targetMap": "maps/outdoor1x1.json",
+                "targetSpawn": "below-home"
+            }
+        }
+
+    ]
+}
