@@ -31,7 +31,7 @@ void PlayState::handleInput(sf::Event& event) {
     }
 
     // ACTION WITHOUT INTERVALS (walk)
-    inputSystem.contiunuousAction(event);
+    inputSystem.continuousAction(event);
 }
 
 void PlayState::update(float dt) {

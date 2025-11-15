@@ -1,7 +1,7 @@
 #ifndef SYSTEMS_ENTITIES_H
 #define SYSTEMS_ENTITIES_H
 
-#include "parser.hpp"
+#include "mapArea.hpp"
 
 struct Direction {
     bool up;
@@ -16,7 +16,7 @@ class InputSystem {
 public:
     InputSystem(Entity& mainCharacter);
 
-    void contiunuousAction(sf::Event& event);
+    void continuousAction(sf::Event& event);
 
     bool checkCollision(Entity& e, float dx, float dy);
 

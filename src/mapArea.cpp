@@ -3,7 +3,7 @@
 
 #include <fstream>
 #include <cassert>
-#include "parser.hpp"
+#include "mapArea.hpp"
 
 
 MapArea::MapArea(Entity &mainCharacter, ResourceManager& rM) : rM(rM), 

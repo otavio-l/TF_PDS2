@@ -5,7 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
 #include "systemsEntities.hpp"
-#include "parser.hpp"
+#include "mapArea.hpp"
 
 
 class Game;
