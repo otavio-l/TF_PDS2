@@ -10,7 +10,7 @@ InputSystem::InputSystem(Entity& mainCharacter) : mainCharacter(mainCharacter) {
 }
 
 
-void InputSystem::contiunuousAction(sf::Event& event) {    
+void InputSystem::continuousAction(sf::Event& event) {    
     // Main character movement
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::W) direction.up = true;
