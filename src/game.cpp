@@ -11,30 +11,32 @@ Game::Game() {
 
     //make_unique is available on c++17 forward
     stateStack.push_back(std::unique_ptr<MenuState>(new MenuState(*this)));
-
-    action.type = PendingActionType::Nothing;
-    action.state = nullptr;
 }
 
 void Game::maintainStates() {
-    switch (action.type)
-    {
-    case PendingActionType::Push:
-        stateStack.push_back(std::move(action.state));
-        break;
-    case PendingActionType::Pop:
-        stateStack.pop_back();
-        break;
-    case PendingActionType::Change:
-        stateStack.pop_back();
-        stateStack.push_back(std::move(action.state));
-        break;
-    default:
-        break;
-    }
+    while (actions.size()) {
 
-    action.type = PendingActionType::Nothing;
-    action.state = nullptr;
+        PendingAction& action = actions.front();
+        switch (action.type)
+        {
+        case PendingActionType::Push:
+            assert (action.state);
+            stateStack.push_back(std::move(action.state));
+            break;
+        case PendingActionType::Pop:
+            stateStack.pop_back();
+            break;
+        case PendingActionType::Change:
+            assert (action.state);
+            stateStack.pop_back();
+            stateStack.push_back(std::move(action.state));
+            break;
+        default:
+            break;
+        }
+
+        actions.pop_front();
+    }
 }
 
 void Game::run() {
