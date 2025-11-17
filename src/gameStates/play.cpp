@@ -25,8 +25,10 @@ void PlayState::handleInput(sf::Event& event) {
     // ACTION WITH INTERVALS (shoot)
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Escape) {
-            game.action.type = PendingActionType::Push;
-            game.action.state = std::unique_ptr<PausedState>(new PausedState(game));
+            game.actions.emplace_back(
+                PendingActionType::Push,
+                std::move(std::unique_ptr<PausedState>(new PausedState(game)))
+            );
         }
     }
 
