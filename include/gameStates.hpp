@@ -1,6 +1,8 @@
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
+
+#include <string>
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
@@ -79,6 +81,24 @@ class PausedState : public GameState {
 public:
     PausedState(Game &game);
     void handleInput(sf::Event& event) override;
+    void render(sf::RenderWindow& window) override;
+};
+
+class Cutscene : public GameState {
+    int currentFrame;
+    int quantFrame;
+    float dtTotal;
+    int currentRepetition;
+
+    std::string spriteFile;
+    float intervalSec; 
+    int repetitions;
+    std::string next;
+public:
+    void loadJson(std::string jsonFile);
+    Cutscene(Game &game, std::string jsonFile);
+    void handleInput(sf::Event& event) override;
+    void update(float dt) override;
     void render(sf::RenderWindow& window) override;
 };
 

@@ -4,6 +4,7 @@
 
 #include <memory>
 #include <vector>
+#include <list>
 #include <SFML/Graphics.hpp>
 #include "gameStates.hpp"
 
@@ -18,6 +19,9 @@ enum class PendingActionType {
 struct PendingAction {
     PendingActionType type;
     std::unique_ptr<GameState> state;
+
+    PendingAction(PendingActionType type, std::unique_ptr<GameState> state) 
+    : type(type), state(std::move(state)) {}
 };
 
 
@@ -35,7 +39,7 @@ class Game {
     void maintainStates();
 public:
     sf::RenderWindow window;
-    PendingAction action;
+    std::list<PendingAction> actions;
 //! Inicializa o jogo e cria a janela principal.
     Game();
 //! Executa o loop principal do jogo.

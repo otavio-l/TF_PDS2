@@ -48,8 +48,10 @@ void MenuState::handleInput(sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
             if (button.getButton() == SelectedMenuButton::PLAY) {
-                game.action.type = PendingActionType::Change;
-                game.action.state = std::unique_ptr<PlayState>(new PlayState(game));
+                game.actions.emplace_back(
+                    PendingActionType::Change, 
+                    std::move(std::unique_ptr<PlayState>(new PlayState(game)))
+                );
             }
         }
         else if (event.key.code == sf::Keyboard::Down) button.next();

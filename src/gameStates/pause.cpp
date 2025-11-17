@@ -9,8 +9,12 @@ PausedState::PausedState(Game &game) : GameState(game) {
 void PausedState::handleInput(sf::Event& event) {
     GameState::handleInput(event);
 
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
-        game.action.type = PendingActionType::Pop;
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+        game.actions.emplace_back(
+                    PendingActionType::Pop,
+                    std::move(nullptr)
+                );
+    }
 }
 
 void PausedState::render(sf::RenderWindow& window) {}
