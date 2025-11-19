@@ -1,15 +1,26 @@
 #define DEBUG
 
 
+#include <fstream>
 #include "gameStates.hpp"
 #include "constants.hpp"
 #include "game.hpp"
 
 
-PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources), 
-inputSystem(mainCharacter) {
+int readSave() {
+    // TODO: exception when file doesn't exist
+    std::fstream file("checkpoint.txt", std::ios::in);
+    int checkpoint;
+    file >> checkpoint;
+    file.close();
+
+    return checkpoint;
+}
+
+
+PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()),
+    inputSystem(mainCharacter) {
     // TODO: resources.loadTexture();
-    
     mainCharacter.hasCollision = true;
     mainCharacter.hasTexture = true;
     // TODO: mainCharacter.drawable.

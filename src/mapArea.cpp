@@ -1,13 +1,14 @@
 // # define NDEBUG
 
 
+#include "mapArea.hpp"
 #include <fstream>
 #include <cassert>
-#include "mapArea.hpp"
+#include <climits>
 
 
-MapArea::MapArea(Entity &mainCharacter, ResourceManager& rM) : rM(rM), 
-    mainCharacter(mainCharacter) {}
+MapArea::MapArea(Entity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
+    mainCharacter(mainCharacter), checkpoint(checkpoint) {}
 
 void MapArea::newMap(std::string jsonFile, std::string currentSpawn) {
     mapEntities.clear();
@@ -50,11 +51,29 @@ void MapArea::loadBackground() {
     }
 }
 
+bool MapArea::checkLifespan(const nlohmann::json_abi_v3_12_0::json& ent) {
+    /*
+    0: intro cutscene and church;
+    1: outside church gameplay;
+    3: end, player took all crucifixes
+    */
+
+    if (!ent.contains("checkpoint")) return true;
+
+    int min {ent["checkpoint"].value("min", INT_MIN)};
+    int max {ent["checkpoint"].value("max", INT_MAX)};
+
+    if ((min <= checkpoint) && (checkpoint <= max)) return true;
+    else return false;
+}
+
 void MapArea::loadmapEntities() {
     assert (mapData.contains("mapEntities"));
 
     for (const auto& e : mapData["mapEntities"]) {
         Entity ent;
+
+        if (!checkLifespan(e)) continue;
 
         ent.hasTexture = e.contains("sprite");
         if (ent.hasTexture) {

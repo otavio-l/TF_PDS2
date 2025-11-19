@@ -33,8 +33,9 @@ public:
     ResourceManager &rM;
     // std::string currentSpawn;
     Entity &mainCharacter;
+    int checkpoint;
 
-    MapArea(Entity &mainCharacter, ResourceManager &rM);
+    MapArea(Entity &mainCharacter, ResourceManager &rM, int checkpoint);
 
     void newMap(std::string jsonFile, std::string currentSpawn);
 
@@ -45,6 +46,8 @@ public:
     void loadBackground();
 
     void loadmapEntities();
+
+    bool checkLifespan(const nlohmann::json_abi_v3_12_0::json& ent);
 };
 
 #endif
