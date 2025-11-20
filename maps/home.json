@@ -62,7 +62,7 @@
                 "height": 3
             },
             "trigger": {
-                "type": "next-map",
+                "type": 1,
                 "targetMap": "maps/outdoor1x1.json",
                 "targetSpawn": "below-home"
             }

@@ -1,28 +1,10 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
-#include <string>
+
 #include <nlohmann/json.hpp>
-#include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
-
-
-struct Trigger {
-    std::string type;
-    std::string targetMap;
-    std::string targetSpawn;
-};
-
-
-struct Entity {
-    sf::Sprite drawable;
-    // sf::FloatRect hitbox;
-    sf::RectangleShape hitbox;
-    bool hasCollision;
-    bool hasTrigger;
-    bool hasTexture;
-    Trigger trigger;
-};
+#include "entity.hpp"
 
 
 class MapArea {

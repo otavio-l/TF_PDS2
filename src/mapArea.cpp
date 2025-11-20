@@ -90,7 +90,7 @@ void MapArea::loadmapEntities() {
         ent.hasTrigger = e.contains("trigger");
         if (ent.hasTrigger) {
             const auto& tr = e["trigger"];
-            ent.trigger.type = tr.value("type", "");
+            ent.trigger.type = tr.value("type", TriggerType::NONE);
             ent.trigger.targetMap = tr.value("targetMap", "");
             ent.trigger.targetSpawn = tr.value("targetSpawn", "");
         }
