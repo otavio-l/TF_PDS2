@@ -21,7 +21,7 @@ public:
 
     void newMap(std::string jsonFile, std::string currentSpawn);
 
-    void loadJson(std::string jsonFile);
+    nlohmann::json loadJson(std::string jsonFile);
 
     void loadCurrentSpawn(std::string targetSpawn);
 
@@ -30,6 +30,8 @@ public:
     void loadmapEntities();
 
     bool checkLifespan(const nlohmann::json_abi_v3_12_0::json& ent);
+
+    void loadWalls();
 };
 
 #endif

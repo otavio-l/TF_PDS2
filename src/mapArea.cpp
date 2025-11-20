@@ -1,4 +1,5 @@
 // # define NDEBUG
+constexpr float SPAWN_FLAG = 1337.0f;
 
 
 #include "mapArea.hpp"
@@ -14,19 +15,22 @@ void MapArea::newMap(std::string jsonFile, std::string currentSpawn) {
     mapEntities.clear();
 
     mapData.clear();
-    loadJson(jsonFile);
+    mapData = loadJson(jsonFile);
     loadCurrentSpawn(currentSpawn);
     loadBackground();
+    loadWalls();
     loadmapEntities();
 }
 
-void MapArea::loadJson(std::string jsonFile)  {
+nlohmann::json MapArea::loadJson(std::string jsonFile)  {
     std::ifstream file(jsonFile);
     if (!file.is_open()) {
         throw std::runtime_error("Could not open map file");
     }
-    file >> mapData;
-    file.close(); // TODO: Maybe error closing before necessary
+    nlohmann::json j;
+    file >> j;
+    file.close();
+    return j;
 }
 
 void MapArea::loadCurrentSpawn(std::string targetSpawn) {
@@ -88,6 +92,44 @@ bool MapArea::checkLifespan(const nlohmann::json_abi_v3_12_0::json& ent) {
 
     if ((min <= checkpoint) && (checkpoint <= max)) return true;
     else return false;
+}
+
+void MapArea::loadWalls() {
+    if (!mapData.contains("walls")) return;
+
+    nlohmann::json defaulWalls = loadJson("maps/walls.json");
+
+    std::array<std::string, 4> walls = {"left-wall", "right-wall", "up-wall", "down-wall"};
+    const auto& customWalls = mapData["walls"];
+
+    for (auto& currentWall : walls) {
+        auto& hitbox {defaulWalls[currentWall]["hitbox"]};
+        Entity ent;
+        ent.hasCollision = true;
+        ent.hasTexture = false;
+        ent.hasTrigger = false;
+        
+        if (customWalls.contains(currentWall)) {
+            if (customWalls[currentWall].contains("hitbox")) {
+                hitbox = customWalls[currentWall]["hitbox"];
+            }
+            if (customWalls[currentWall].contains("trigger")) {
+                ent.hasTrigger = true;
+                ent.trigger.type = customWalls[currentWall]["trigger"].value("type", TriggerType::NONE);
+                ent.trigger.targetMap = customWalls[currentWall]["trigger"].value("targetMap", "");
+                ent.trigger.targetSpawn = customWalls[currentWall]["trigger"].value("targetSpawn", "");
+            }
+        }
+
+        float x = hitbox.value("x", 0.0f);
+        float y = hitbox.value("y", 0.0f);
+        float width = hitbox.value("width", 0.0f);
+        float height = hitbox.value("height", 0.0f);
+        ent.hitbox.setPosition(x, y);
+        ent.hitbox.setSize({width, height});
+
+        mapEntities.push_back(ent);
+    }
 }
 
 void MapArea::loadmapEntities() {
