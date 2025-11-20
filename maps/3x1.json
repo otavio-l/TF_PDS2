@@ -1,0 +1,49 @@
+{
+    "type": "outside",
+    "spawn": {
+        "below-home": {"x": 50, "y": 101},
+        "right": {},
+        "up": {}
+    },
+    "walls": {
+        "right-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/3x2.json",
+                "targetSpawn": "left"
+            }
+        },
+        "up-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/2x1.json",
+                "targetSpawn": "down"
+            }
+        }
+    },
+    "mapEntities": [
+        {
+            "name": "home",
+            "hitbox": {
+                "x": 20,
+                "y": 20,
+                "width": 65,
+                "height": 80
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 140,
+                "y": 55,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 152,
+                "y": 86,
+                "width": 7,
+                "height": 7
+            }
+        }
+    ]
+}
