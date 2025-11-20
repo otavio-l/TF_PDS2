@@ -1,0 +1,42 @@
+{
+    "type": "outside",
+    "spawn": {
+        "right": {},
+        "up": {},
+        "left": {},
+        "down": {}
+    },
+    "walls": {
+        "left-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/2x1.json",
+                "targetSpawn": "right"
+            }
+        },
+        "up-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/1x2.json",
+                "targetSpawn": "down"
+            }
+        },
+        "right-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/2x3.json",
+                "targetSpawn": "left"
+            }
+        },
+        "down-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/3x2.json",
+                "targetSpawn": "up"
+            }
+        }
+    },
+    "mapEntities": [
+        
+    ]
+}

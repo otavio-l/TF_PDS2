@@ -20,6 +20,7 @@ int readSave() {
 
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
     // TODO: resources.loadTexture();
+    resources.loadTexture("sprites/Arvore-1");
 
     direction.down = false;
     direction.left = false;

@@ -63,7 +63,7 @@
             },
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/outdoor1x1.json",
+                "targetMap": "maps/3x1.json",
                 "targetSpawn": "below-home"
             }
         }
