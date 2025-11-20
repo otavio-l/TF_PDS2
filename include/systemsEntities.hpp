@@ -1,7 +1,10 @@
 #ifndef SYSTEMS_ENTITIES_H
 #define SYSTEMS_ENTITIES_H
 
+
+#include "entity.hpp"
 #include "mapArea.hpp"
+
 
 struct Direction {
     bool up;
@@ -10,20 +13,10 @@ struct Direction {
     bool left;
 };
 
-class InputSystem {
-    Direction direction;
-    Entity& mainCharacter;
-public:
-    InputSystem(Entity& mainCharacter);
 
-    void continuousAction(sf::Event& event);
+void continuousAction(sf::Event& event, Direction& direction);
 
-    bool checkCollision(Entity& e, float dx, float dy);
+void movePlayer(Entity& mainCharacter, MapArea& mapArea, Direction& direction);
 
-    void moveEntity(float dx, float dy);
-
-    // To update main character position it has to see the direction flags
-    void updateUserPosition(MapArea& mapArea);
-};
 
 #endif

@@ -18,9 +18,14 @@ int readSave() {
 }
 
 
-PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()),
-    inputSystem(mainCharacter) {
+PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
     // TODO: resources.loadTexture();
+
+    direction.down = false;
+    direction.left = false;
+    direction.right = false;
+    direction.up = false;
+
     mainCharacter.hasCollision = true;
     mainCharacter.hasTexture = true;
     // TODO: mainCharacter.drawable.
@@ -44,12 +49,11 @@ void PlayState::handleInput(sf::Event& event) {
     }
 
     // ACTION WITHOUT INTERVALS (walk)
-    inputSystem.continuousAction(event);
+    continuousAction(event, direction);
 }
 
 void PlayState::update(float dt) {
-    // TODO: Change game states (PausedState should have a intermediary unique_ptr to store paused PlayState)
-    inputSystem.updateUserPosition(mapArea);
+    movePlayer(mainCharacter, mapArea, direction);
 }
 
 void PlayState::render(sf::RenderWindow& window) {

@@ -68,7 +68,7 @@ public:
 class PlayState : public GameState {
     Entity mainCharacter;
     MapArea mapArea;
-    InputSystem inputSystem;
+    Direction direction;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;
