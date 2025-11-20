@@ -32,8 +32,31 @@ void MapArea::loadJson(std::string jsonFile)  {
 void MapArea::loadCurrentSpawn(std::string targetSpawn) {
     assert (mapData["spawn"].contains(targetSpawn));
 
-    float x = mapData["spawn"][targetSpawn]["x"];
-    float y = mapData["spawn"][targetSpawn]["y"];
+    float x = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
+    float y = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
+
+    if (x == SPAWN_FLAG) {
+        if (targetSpawn == "left") {
+            x = 1.0f;
+            y = 70.0f;
+        }
+        else if (targetSpawn == "right") {
+            x = 183.0f;
+            y = 60.0f;
+        }
+        else if (targetSpawn == "up") {
+            x = 90.0f;
+            y = 1.0f;
+        }
+        else if (targetSpawn == "down") {
+            x = 90.0f;
+            y = 138.0f;
+        }
+        else {
+            throw std::runtime_error("Unspecified map spawn");
+        }
+    }
+
     mainCharacter.drawable.setPosition(x, y);
     mainCharacter.hitbox.setPosition(x, y);
 }
