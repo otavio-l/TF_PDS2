@@ -1,0 +1,6 @@
+Tabela Altura x Largura
+Personagem - 7x20 (Todas as direções) (2 Frames)
+Arvores - 31x38 (Base do tronco 7 pixels centralizado)
+Casa - 150x84 (a porta está a 82 pixels da esquerda pra direita)
+
+
