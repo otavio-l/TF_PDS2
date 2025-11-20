@@ -20,6 +20,16 @@ int readSave() {
 
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
     // TODO: resources.loadTexture();
+    resources.loadTexture("sprites/Personagem-baixo1");
+    resources.loadTexture("sprites/Personagem-baixo2");
+    resources.loadTexture("sprites/Personagem-cima1");
+    resources.loadTexture("sprites/Personagem-cima2");
+    resources.loadTexture("sprites/Personagem-esquerda1");
+    resources.loadTexture("sprites/Personagem-esquerda2");
+    resources.loadTexture("sprites/Personagem-direita1");
+    resources.loadTexture("sprites/Personagem-direita2");
+
+    walkFrameCounter = 0;
 
     direction.down = false;
     direction.left = false;
@@ -54,6 +64,47 @@ void PlayState::handleInput(sf::Event& event) {
 
 void PlayState::update(float dt) {
     movePlayer(mainCharacter, mapArea, direction);
+
+    // Update walk animation
+    if (direction.up || direction.down || direction.left || direction.right) {
+        walkFrameCounter = (walkFrameCounter + 1) % (constants::fps / 2); // troca de frame a cada 0.5s
+    }
+    else {
+        walkFrameCounter = 0;
+    }
+    
+    if (direction.up) {
+        if (walkFrameCounter < (constants::fps / 5)) {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-cima1"));
+        }
+        else {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-cima2"));
+        }
+    }
+    else if (direction.down) {
+        if (walkFrameCounter < (constants::fps / 5)) {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-baixo1"));
+        }
+        else {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-baixo2"));
+        }
+    }
+    else if (direction.left) {
+        if (walkFrameCounter < (constants::fps / 5)) {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-esquerda1"));
+        }
+        else {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-esquerda2"));
+        }
+    }
+    else if (direction.right) {
+        if (walkFrameCounter < (constants::fps / 5)) {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-direita1"));
+        }
+        else {
+            mainCharacter.drawable.setTexture(resources.getTexture("sprites/Personagem-direita2"));
+        }
+    }
 }
 
 void PlayState::render(sf::RenderWindow& window) {
