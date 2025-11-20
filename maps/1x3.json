@@ -1,0 +1,26 @@
+{
+    "type": "outside",
+    "spawn": {
+        "left": {},
+        "down": {}
+    },
+    "walls": {
+        "left-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/1x2.json",
+                "targetSpawn": "right"
+            }
+        },
+        "down-wall": {
+            "trigger": {
+                "type": 1,
+                "targetMap": "maps/2x3.json",
+                "targetSpawn": "up"
+            }
+        }
+    },
+    "mapEntities": [
+        
+    ]
+}
