@@ -121,10 +121,10 @@ void MapArea::loadWalls() {
             }
         }
 
-        float x = hitbox.value("x", 0);
-        float y = hitbox.value("y", 0);
-        float width = hitbox.value("width", 0);
-        float height = hitbox.value("height", 0);
+        float x = hitbox.value("x", 0.0f);
+        float y = hitbox.value("y", 0.0f);
+        float width = hitbox.value("width", 0.0f);
+        float height = hitbox.value("height", 0.0f);
         ent.hitbox.setPosition(x, y);
         ent.hitbox.setSize({width, height});
 

@@ -30,6 +30,7 @@ PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resou
     resources.loadTexture("sprites/Personagem-direita2");
 
     walkFrameCounter = 0;
+    resources.loadTexture("sprites/Arvore-1");
 
     direction.down = false;
     direction.left = false;
