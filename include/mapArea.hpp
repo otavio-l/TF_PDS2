@@ -14,10 +14,10 @@ public:
     std::vector<MapEntity> mapEntities;
     ResourceManager &rM;
     // std::string currentSpawn;
-    Entity &mainCharacter;
+    LiveEntity &mainCharacter;
     int checkpoint;
 
-    MapArea(Entity &mainCharacter, ResourceManager &rM, int checkpoint);
+    MapArea(LiveEntity &mainCharacter, ResourceManager &rM, int checkpoint);
 
     void newMap(std::string jsonFile, std::string currentSpawn);
 

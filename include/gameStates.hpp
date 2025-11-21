@@ -66,10 +66,8 @@ public:
 
 //! Representa o estado do jogo.
 class PlayState : public GameState {
-    Entity mainCharacter;
+    LiveEntity mainCharacter;
     MapArea mapArea;
-    Direction direction;
-    int walkFrameCounter;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;

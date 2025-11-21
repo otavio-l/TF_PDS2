@@ -8,7 +8,7 @@ constexpr float SPAWN_FLAG = 1337.0f;
 #include <climits>
 
 
-MapArea::MapArea(Entity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
+MapArea::MapArea(LiveEntity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
     mainCharacter(mainCharacter), checkpoint(checkpoint) {}
 
 void MapArea::newMap(std::string jsonFile, std::string currentSpawn) {

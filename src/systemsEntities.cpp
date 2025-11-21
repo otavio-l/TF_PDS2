@@ -2,19 +2,19 @@
 #include "constants.hpp"
 
 
-void continuousAction(sf::Event& event, Direction& direction) {    
+void continuousAction(sf::Event& event, LiveEntity& mainCharacter) {    
     // Main character movement
     if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::W) direction.up = true;
-        if (event.key.code == sf::Keyboard::A) direction.left = true;
-        if (event.key.code == sf::Keyboard::S) direction.down = true;
-        if (event.key.code == sf::Keyboard::D) direction.right = true;
+        if (event.key.code == sf::Keyboard::W) mainCharacter.direction.up = true;
+        if (event.key.code == sf::Keyboard::A) mainCharacter.direction.left = true;
+        if (event.key.code == sf::Keyboard::S) mainCharacter.direction.down = true;
+        if (event.key.code == sf::Keyboard::D) mainCharacter.direction.right = true;
     }
     else if (event.type == sf::Event::KeyReleased) {
-        if (event.key.code == sf::Keyboard::W) direction.up = false;
-        if (event.key.code == sf::Keyboard::A) direction.left = false;
-        if (event.key.code == sf::Keyboard::S) direction.down = false;
-        if (event.key.code == sf::Keyboard::D) direction.right = false;
+        if (event.key.code == sf::Keyboard::W) mainCharacter.direction.up = false;
+        if (event.key.code == sf::Keyboard::A) mainCharacter.direction.left = false;
+        if (event.key.code == sf::Keyboard::S) mainCharacter.direction.down = false;
+        if (event.key.code == sf::Keyboard::D) mainCharacter.direction.right = false;
     }
 }
 
@@ -31,7 +31,7 @@ bool checkCollision(Entity& mainCharacter, Entity& e, float dx, float dy) {
     return eMain.intersects(eHitbox);
 }
 
-void updatePosition(Entity& mainCharacter, float dx, float dy) {
+void updatePosition(LiveEntity& mainCharacter, float dx, float dy) {
     sf::Vector2f spritePos {
         mainCharacter.drawable.getPosition().x + dx,
         mainCharacter.drawable.getPosition().y + dy
@@ -46,7 +46,7 @@ void updatePosition(Entity& mainCharacter, float dx, float dy) {
     mainCharacter.hitbox.setPosition(hitboxPos);
 }
 
-void triggerDispatcher(Entity& e, MapArea& mapArea) {
+void triggerDispatcher(MapEntity& e, MapArea& mapArea) {
     switch (e.trigger.type)
     {
     case TriggerType::NEXT_MAP:
@@ -58,7 +58,7 @@ void triggerDispatcher(Entity& e, MapArea& mapArea) {
     }
 }
 
-void movePlayer(Entity& mainCharacter, MapArea& mapArea, Direction& direction) {
+void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea) {
     // TODO: Trigger entities still are treated as blocking
     bool collisionUp{false};
     bool collisionRight{false};
@@ -70,26 +70,26 @@ void movePlayer(Entity& mainCharacter, MapArea& mapArea, Direction& direction) {
         if (!e.hasCollision && !e.hasTrigger) continue;
         bool currentCollision {false};
 
-        if (!collisionUp && direction.up) {
+        if (!collisionUp && mainCharacter.direction.up) {
             if (checkCollision(mainCharacter, e, 0, -constants::mainCharacterVelocity)) {
                 collisionUp = true;
                 currentCollision = true;
             }
         }
-        if (!collisionRight && direction.right) {
+        if (!collisionRight && mainCharacter.direction.right) {
             if (checkCollision(mainCharacter, e, constants::mainCharacterVelocity, 0)) {
                 collisionRight = true;
                 currentCollision = true;
             }
         }
-        if (!collisionDown && direction.down) {
+        if (!collisionDown && mainCharacter.direction.down) {
             if (checkCollision(mainCharacter, e, 0, constants::mainCharacterVelocity)) {
                 collisionDown = true;
                 currentCollision = true;
             }
             
         }
-        if (!collisionLeft && direction.left) {
+        if (!collisionLeft && mainCharacter.direction.left) {
             if (checkCollision(mainCharacter, e, -constants::mainCharacterVelocity, 0)) {
                 collisionLeft = true;
                 currentCollision = true;
