@@ -36,8 +36,9 @@ struct LiveEntity: public Entity {
     Direction direction;
     int animateCounter;
 
+    LiveEntity();
     LiveEntity(sf::Texture& spriteSheet);
-    void animate(sf::Texture& spriteSheet);
+    void animate();
 };
 
 struct MapEntity: public Entity {

@@ -102,16 +102,16 @@ void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea) {
         }
     }
 
-    if (direction.up && !collisionUp) {
+    if (mainCharacter.direction.up && !collisionUp) {
         updatePosition(mainCharacter, 0, -constants::mainCharacterVelocity);
     }
-    if (direction.right && !collisionRight) {
+    if (mainCharacter.direction.right && !collisionRight) {
         updatePosition(mainCharacter, constants::mainCharacterVelocity, 0);
     }
-    if (direction.left && !collisionLeft) {
+    if (mainCharacter.direction.left && !collisionLeft) {
         updatePosition(mainCharacter, -constants::mainCharacterVelocity, 0);
     }
-    if (direction.down && !collisionDown) {
+    if (mainCharacter.direction.down && !collisionDown) {
         updatePosition(mainCharacter, 0, constants::mainCharacterVelocity);
     }
 }

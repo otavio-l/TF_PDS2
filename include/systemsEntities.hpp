@@ -5,9 +5,9 @@
 #include "entity.hpp"
 #include "mapArea.hpp"
 
-void continuousAction(sf::Event& event, Direction& direction);
+void continuousAction(sf::Event& event, LiveEntity& mainCharacter);
 
-void movePlayer(Entity& mainCharacter, MapArea& mapArea);
+void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea);
 
 
 #endif

@@ -19,7 +19,6 @@ int readSave() {
 
 
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
-    // TODO: resources.loadTexture();
     resources.loadTexture("sprites/main_character");
     mainCharacter = LiveEntity(resources.getTexture("sprites/main_character"));  
 
@@ -40,17 +39,17 @@ void PlayState::handleInput(sf::Event& event) {
     }
 
     // ACTION WITHOUT INTERVALS (walk)
-    continuousAction(event, direction);
+    continuousAction(event, this->mainCharacter);
 }
 
 void PlayState::update(float dt) {
-    movePlayer(mainCharacter, mapArea, direction);
+    movePlayer(this->mainCharacter, mapArea);
     mainCharacter.animate();
 }
 
 void PlayState::render(sf::RenderWindow& window) {
 #ifdef DEBUG
-    window.draw(mainCharacter.hitbox);
+    window.draw(mainCharacter.drawable);
     for (auto& e : mapArea.mapEntities) {
         if (e.hasCollision) {
             window.draw(e.hitbox);

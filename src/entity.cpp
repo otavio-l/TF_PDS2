@@ -1,6 +1,8 @@
 #include "entity.hpp"
 #include "constants.hpp"
 
+LiveEntity::LiveEntity() : Entity(), direction{false, false, false, false}, animateCounter(0) {}
+
 LiveEntity::LiveEntity(sf::Texture& spriteSheet) : Entity(), direction{false, false, false, false}, animateCounter(0) {
     drawable.setTexture(spriteSheet);
     hitbox.setPosition(100.0f, 80.0f);
