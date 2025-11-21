@@ -33,7 +33,7 @@ void LiveEntity::animate() {
             drawable.setTextureRect(sf::IntRect(7, 20, 7, 20));
         }
     }
-    else if (direction.left) {
+    else if (direction.right) {
         if (animateCounter < (constants::fps / 5)) {
             drawable.setTextureRect(sf::IntRect(0, 40, 7, 20));
         }
@@ -41,7 +41,7 @@ void LiveEntity::animate() {
             drawable.setTextureRect(sf::IntRect(7, 40, 7, 20));
         }
     }
-    else if (direction.right) {
+    else if (direction.left) {
         if (animateCounter < (constants::fps / 5)) {
             drawable.setTextureRect(sf::IntRect(0, 60, 7, 20));
         }
