@@ -11,8 +11,8 @@ namespace constants {
     constexpr int yPixels{ yLogicPixels * 4 };
 
     constexpr int mainCharacterVelocity{1};
-    constexpr int mainHeight{17};
-    constexpr int mainWidth{9};
+    constexpr int mainHeight{20};
+    constexpr int mainWidth{7};
 
     // Compatibility reasons
     constexpr int tileSizePixels{32};

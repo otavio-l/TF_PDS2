@@ -5,18 +5,9 @@
 #include "entity.hpp"
 #include "mapArea.hpp"
 
+void continuousAction(sf::Event& event, LiveEntity& mainCharacter);
 
-struct Direction {
-    bool up;
-    bool down;
-    bool right;
-    bool left;
-};
-
-
-void continuousAction(sf::Event& event, Direction& direction);
-
-void movePlayer(Entity& mainCharacter, MapArea& mapArea, Direction& direction);
+void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea);
 
 
 #endif

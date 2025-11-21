@@ -19,16 +19,34 @@ struct Trigger {
     std::string targetSpawn;
 };
 
+struct Direction {
+    bool up;
+    bool down;
+    bool right;
+    bool left;
+};
 
 struct Entity {
     sf::Sprite drawable;
     // sf::FloatRect hitbox;
     sf::RectangleShape hitbox;
+};
+
+struct LiveEntity: public Entity {
+    Direction direction;
+    int animateCounter;
+
+    LiveEntity();
+    LiveEntity(sf::Texture& spriteSheet);
+    void animate();
+};
+
+struct MapEntity: public Entity {
+    std::string textureFile;
     bool hasCollision;
     bool hasTrigger;
     bool hasTexture;
     Trigger trigger;
 };
-
 
 #endif

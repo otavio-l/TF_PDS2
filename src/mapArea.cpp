@@ -8,7 +8,7 @@ constexpr float SPAWN_FLAG = 1337.0f;
 #include <climits>
 
 
-MapArea::MapArea(Entity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
+MapArea::MapArea(LiveEntity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
     mainCharacter(mainCharacter), checkpoint(checkpoint) {}
 
 void MapArea::newMap(std::string jsonFile, std::string currentSpawn) {
@@ -68,7 +68,7 @@ void MapArea::loadCurrentSpawn(std::string targetSpawn) {
 void MapArea::loadBackground() {
     std::string background = mapData.value("background", "");
     if (!background.empty()) {
-        Entity ent;
+        MapEntity ent;
         ent.drawable.setTexture(rM.getTexture(background));
         ent.drawable.setPosition(0, 0);
         ent.hasTexture = true;
@@ -104,7 +104,7 @@ void MapArea::loadWalls() {
 
     for (auto& currentWall : walls) {
         auto& hitbox {defaulWalls[currentWall]["hitbox"]};
-        Entity ent;
+        MapEntity ent;
         ent.hasCollision = true;
         ent.hasTexture = false;
         ent.hasTrigger = false;
@@ -136,7 +136,7 @@ void MapArea::loadmapEntities() {
     assert (mapData.contains("mapEntities"));
 
     for (const auto& e : mapData["mapEntities"]) {
-        Entity ent;
+        MapEntity ent;
 
         if (!checkLifespan(e)) continue;
 
