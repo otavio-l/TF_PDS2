@@ -2,7 +2,8 @@
     "type": "outside",
     "spawn": {
         "left": {},
-        "down": {}
+        "down": {},
+        "below-church": {"x": 129, "y": 80}
     },
     "walls": {
         "left-wall": {
@@ -21,6 +22,19 @@
         }
     },
     "mapEntities": [
-        
+        {
+            "name": "church",
+            "sprite": {
+                "x": 0,
+                "y": 0,
+                "texture": "ext_church"
+            },
+            "hitbox": {
+                "x": 106,
+                "y": 2,
+                "width": 53,
+                "height": 20
+            }
+        }
     ]
 }

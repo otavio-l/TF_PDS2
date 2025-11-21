@@ -29,5 +29,33 @@
         }
     },
     "mapEntities": [
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 10,
+                "y": 120,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 22,
+                "y": 151,
+                "width": 7,
+                "height": 2
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 160,
+                "y": 5,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 172,
+                "y": 36,
+                "width": 7,
+                "height": 2
+            }
+        }
     ]
 }

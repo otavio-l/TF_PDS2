@@ -21,6 +21,61 @@
         }
     },
     "mapEntities": [
-        
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 5,
+                "y": 125,
+                "texture": "deadtree"
+            },
+            "hitbox": {
+                "x": 12,
+                "y": 158,
+                "width": 4,
+                "height": 2
+            }
+        },
+        {
+            "name": "house",
+            "sprite": {
+                "x": 5,
+                "y": 5,
+                "texture": "house"
+            },
+            "hitbox": {
+                "x": 5,
+                "y": 5,
+                "width": 45,
+                "height": 40
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 110,
+                "y": 70,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 122,
+                "y": 101,
+                "width": 7,
+                "height": 2
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 165,
+                "y": 10,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 177,
+                "y": 41,
+                "width": 7,
+                "height": 2
+            }
+        }
     ]
 }

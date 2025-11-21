@@ -37,6 +37,61 @@
         }
     },
     "mapEntities": [
-        
+        {
+            "name": "well",
+            "sprite": {
+                "x": 90,
+                "y": 75,
+                "texture": "well"
+            },
+            "hitbox": {
+                "x": 90,
+                "y": 75,
+                "width": 25,
+                "height": 10
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 140,
+                "y": 55,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 152,
+                "y": 86,
+                "width": 7,
+                "height": 2
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 20,
+                "y": 25,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 32,
+                "y": 56,
+                "width": 7,
+                "height": 2
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 30,
+                "y": 110,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 42,
+                "y": 141,
+                "width": 7,
+                "height": 2
+            }
+        }
     ]
 }

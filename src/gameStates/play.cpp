@@ -1,4 +1,4 @@
-#define DEBUG
+// #define DEBUG
 
 
 #include <fstream>
@@ -20,11 +20,17 @@ int readSave() {
 
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
     resources.loadTexture("sprites/Arvore-1");
+    resources.loadTexture("church");
+    resources.loadTexture("ext_church");
+    resources.loadTexture("deadtree");
+    resources.loadTexture("house");
+    resources.loadTexture("well");
     resources.loadTexture("sprites/main_character");
+    
     mainCharacter = LiveEntity(resources.getTexture("sprites/main_character"));
     mainCharacter.drawable.setTextureRect(sf::IntRect(0, 0, 7, 20));
 
-    mapArea.newMap("maps/home.json", "right");
+    mapArea.newMap("maps/church.json", "right");
 }
 
 void PlayState::handleInput(sf::Event& event) {
@@ -50,12 +56,17 @@ void PlayState::update(float dt) {
 }
 
 void PlayState::render(sf::RenderWindow& window) {
-#ifdef DEBUG
-    window.draw(mainCharacter.drawable);
     for (auto& e : mapArea.mapEntities) {
+#ifdef DEBUG
         if (e.hasCollision) {
             window.draw(e.hitbox);
         }
-    }
 #endif
+#ifndef DEBUG
+        if (e.hasTexture) {
+            window.draw(e.drawable);
+        }
+#endif
+    }
+    window.draw(mainCharacter.drawable);
 }
