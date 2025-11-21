@@ -11,7 +11,7 @@ class MapArea {
 public:
     // std::string jsonFile;
     nlohmann::json mapData;
-    std::vector<Entity> mapEntities;
+    std::vector<MapEntity> mapEntities;
     ResourceManager &rM;
     // std::string currentSpawn;
     Entity &mainCharacter;

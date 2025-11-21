@@ -24,6 +24,11 @@ struct Entity {
     sf::Sprite drawable;
     // sf::FloatRect hitbox;
     sf::RectangleShape hitbox;
+    int animateCounter;
+};
+
+struct MapEntity: public Entity {
+    std::string textureFile;
     bool hasCollision;
     bool hasTrigger;
     bool hasTexture;
