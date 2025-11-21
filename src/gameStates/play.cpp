@@ -19,6 +19,7 @@ int readSave() {
 
 
 PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
+    resources.loadTexture("sprites/Arvore-1");
     resources.loadTexture("sprites/main_character");
     mainCharacter = LiveEntity(resources.getTexture("sprites/main_character"));
     mainCharacter.drawable.setTextureRect(sf::IntRect(0, 0, 7, 20));
