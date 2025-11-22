@@ -19,11 +19,11 @@ public:
 
     MapArea(LiveEntity &mainCharacter, ResourceManager &rM, int checkpoint);
 
-    void newMap(std::string jsonFile, std::string currentSpawn);
+    void newMap(int targetMap, std::string currentSpawn);
 
     nlohmann::json loadJson(std::string jsonFile);
 
-    void loadCurrentSpawn(std::string targetSpawn);
+    void loadCurrentSpawn(int targetMap, std::string targetSpawn);
 
     void loadBackground();
 

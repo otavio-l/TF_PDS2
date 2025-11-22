@@ -1,22 +1,42 @@
 // # define NDEBUG
-constexpr float SPAWN_FLAG = 1337.0f;
+constexpr int SPAWN_FLAG = 1337;
 
 
 #include "mapArea.hpp"
+#include <array>
 #include <fstream>
 #include <cassert>
 #include <climits>
+#include "constants.hpp"
+
+
+static const std::array<std::string, 10> jsonLookup = {
+    "maps/1x1.json",
+    "maps/1x2.json",
+    "maps/1x3.json",
+    "maps/2x1.json",
+    "maps/2x2.json",
+    "maps/2x3.json",
+    "maps/3x1.json",
+    "maps/3x2.json",
+    "maps/3x3.json",
+    "maps/church.json"
+};
+
+static std::array<std::string, 4> expectedWalls = {
+    "left-wall", "right-wall", "up-wall", "down-wall"
+};
 
 
 MapArea::MapArea(LiveEntity &mainCharacter, ResourceManager& rM, int checkpoint) : rM(rM), 
     mainCharacter(mainCharacter), checkpoint(checkpoint) {}
 
-void MapArea::newMap(std::string jsonFile, std::string currentSpawn) {
+void MapArea::newMap(int targetMap, std::string currentSpawn) {
     mapEntities.clear();
 
     mapData.clear();
-    mapData = loadJson(jsonFile);
-    loadCurrentSpawn(currentSpawn);
+    mapData = loadJson(jsonLookup[(long unsigned int)targetMap]);
+    loadCurrentSpawn(targetMap, currentSpawn);
     loadBackground();
     loadWalls();
     loadmapEntities();
@@ -33,36 +53,49 @@ nlohmann::json MapArea::loadJson(std::string jsonFile)  {
     return j;
 }
 
-void MapArea::loadCurrentSpawn(std::string targetSpawn) {
+void MapArea::loadCurrentSpawn(int targetMap, std::string targetSpawn) {
+    // define default spawn coordinates if not specified in json
     assert (mapData["spawn"].contains(targetSpawn));
+    assert (SPAWN_FLAG > (constants::xLogicPixels * 4));
 
-    float x = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
-    float y = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
+    int absoluteX = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
+    int absoluteY = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
 
-    if (x == SPAWN_FLAG) {
+    if (absoluteX == SPAWN_FLAG) {
+        // it doens't work for church.json, it's outside main map;
+        int screenX {targetMap / 3};
+        int screenY {targetMap % 3};
+        int offsetX {constants::xLogicPixels * screenY};
+        int offsetY {constants::yLogicPixels * screenX};
+
         if (targetSpawn == "left") {
-            x = 1.0f;
-            y = 70.0f;
+            absoluteX = 1 + offsetX;
+            absoluteY = 70 + offsetY;
         }
         else if (targetSpawn == "right") {
-            x = 183.0f;
-            y = 60.0f;
+            absoluteX = 183 + offsetX;
+            absoluteY = 60 + offsetY;
         }
         else if (targetSpawn == "up") {
-            x = 90.0f;
-            y = 1.0f;
+            absoluteX = 90 + offsetX;
+            absoluteY = 1 + offsetY;
         }
         else if (targetSpawn == "down") {
-            x = 90.0f;
-            y = 138.0f;
+            absoluteX = 90 + offsetX;
+            absoluteY = 138 + offsetY;
         }
         else {
             throw std::runtime_error("Unspecified map spawn");
         }
     }
 
-    mainCharacter.drawable.setPosition(x, y);
-    mainCharacter.hitbox.setPosition(x, y);
+    mainCharacter.absX = static_cast<float>(absoluteX);
+    mainCharacter.absY = static_cast<float>(absoluteY);
+
+    float relativeX { static_cast<float>( absoluteX % constants::xLogicPixels ) };
+    float relativeY { static_cast<float>( absoluteY % constants::yLogicPixels ) };
+    mainCharacter.drawable.setPosition(relativeX, relativeY);
+    mainCharacter.hitbox.setPosition(relativeX, relativeY);
 }
 
 void MapArea::loadBackground() {
@@ -95,14 +128,14 @@ bool MapArea::checkLifespan(const nlohmann::json_abi_v3_12_0::json& ent) {
 }
 
 void MapArea::loadWalls() {
+    // create expectedWalls with default values if not specified by
     if (!mapData.contains("walls")) return;
 
     nlohmann::json defaulWalls = loadJson("maps/walls.json");
 
-    std::array<std::string, 4> walls = {"left-wall", "right-wall", "up-wall", "down-wall"};
     const auto& customWalls = mapData["walls"];
 
-    for (auto& currentWall : walls) {
+    for (auto& currentWall : expectedWalls) {
         auto& hitbox {defaulWalls[currentWall]["hitbox"]};
         MapEntity ent;
         ent.hasCollision = true;
@@ -116,7 +149,7 @@ void MapArea::loadWalls() {
             if (customWalls[currentWall].contains("trigger")) {
                 ent.hasTrigger = true;
                 ent.trigger.type = customWalls[currentWall]["trigger"].value("type", TriggerType::NONE);
-                ent.trigger.targetMap = customWalls[currentWall]["trigger"].value("targetMap", "");
+                ent.trigger.targetMap = customWalls[currentWall]["trigger"].value("targetMap", 0);
                 ent.trigger.targetSpawn = customWalls[currentWall]["trigger"].value("targetSpawn", "");
             }
         }
@@ -156,7 +189,7 @@ void MapArea::loadmapEntities() {
         if (ent.hasTrigger) {
             const auto& tr = e["trigger"];
             ent.trigger.type = tr.value("type", TriggerType::NONE);
-            ent.trigger.targetMap = tr.value("targetMap", "");
+            ent.trigger.targetMap = tr.value("targetMap", 0);
             ent.trigger.targetSpawn = tr.value("targetSpawn", "");
         }
 

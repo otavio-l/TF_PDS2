@@ -32,6 +32,9 @@ bool checkCollision(Entity& mainCharacter, Entity& e, float dx, float dy) {
 }
 
 void updatePosition(LiveEntity& mainCharacter, float dx, float dy) {
+    mainCharacter.absX += dx;
+    mainCharacter.absY += dy;
+
     sf::Vector2f spritePos {
         mainCharacter.drawable.getPosition().x + dx,
         mainCharacter.drawable.getPosition().y + dy

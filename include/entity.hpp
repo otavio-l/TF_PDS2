@@ -15,7 +15,7 @@ enum class TriggerType {
 
 struct Trigger {
     TriggerType type;
-    std::string targetMap;
+    int targetMap;
     std::string targetSpawn;
 };
 
@@ -35,6 +35,8 @@ struct Entity {
 struct LiveEntity: public Entity {
     Direction direction;
     int animateCounter;
+    float absX;
+    float absY;
 
     LiveEntity();
     LiveEntity(sf::Texture& spriteSheet);
@@ -42,7 +44,6 @@ struct LiveEntity: public Entity {
 };
 
 struct MapEntity: public Entity {
-    std::string textureFile;
     bool hasCollision;
     bool hasTrigger;
     bool hasTexture;
