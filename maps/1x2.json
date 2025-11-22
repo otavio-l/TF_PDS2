@@ -44,17 +44,17 @@
             }
         },
         {
-            "name": "house",
+            "name": "tree",
             "sprite": {
-                "x": 60,
-                "y": 90,
-                "texture": "house"
+                "x": 45,
+                "y": 30,
+                "texture": "sprites/Arvore-1"
             },
             "hitbox": {
-                "x": 60,
-                "y": 90,
-                "width": 45,
-                "height": 40
+                "x": 57,
+                "y": 61,
+                "width": 7,
+                "height": 2
             }
         },
         {
@@ -72,17 +72,17 @@
             }
         },
         {
-            "name": "tree",
+            "name": "house",
             "sprite": {
-                "x": 45,
-                "y": 30,
-                "texture": "sprites/Arvore-1"
+                "x": 60,
+                "y": 90,
+                "texture": "house"
             },
             "hitbox": {
-                "x": 57,
-                "y": 61,
-                "width": 7,
-                "height": 2
+                "x": 60,
+                "y": 90,
+                "width": 45,
+                "height": 40
             }
         }
     ]

@@ -32,6 +32,20 @@
         {
             "name": "tree",
             "sprite": {
+                "x": 5,
+                "y": 5,
+                "texture": "deadtree"
+            },
+            "hitbox": {
+                "x": 12,
+                "y": 28,
+                "width": 4,
+                "height": 2
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
                 "x": 20,
                 "y": 20,
                 "texture": "sprites/Arvore-1"
@@ -54,20 +68,6 @@
                 "x": 112,
                 "y": 111,
                 "width": 7,
-                "height": 2
-            }
-        },
-        {
-            "name": "tree",
-            "sprite": {
-                "x": 5,
-                "y": 5,
-                "texture": "deadtree"
-            },
-            "hitbox": {
-                "x": 12,
-                "y": 28,
-                "width": 4,
                 "height": 2
             }
         }

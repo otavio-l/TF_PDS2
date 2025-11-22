@@ -25,15 +25,15 @@
         {
             "name": "church",
             "sprite": {
-                "x": 0,
-                "y": 0,
+                "x": 107,
+                "y": 1,
                 "texture": "ext_church"
             },
             "hitbox": {
                 "x": 106,
                 "y": 2,
                 "width": 53,
-                "height": 20
+                "height": 70
             }
         }
     ]

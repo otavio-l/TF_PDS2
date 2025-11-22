@@ -38,17 +38,17 @@
     },
     "mapEntities": [
         {
-            "name": "well",
+            "name": "tree",
             "sprite": {
-                "x": 90,
-                "y": 75,
-                "texture": "well"
+                "x": 20,
+                "y": 25,
+                "texture": "sprites/Arvore-1"
             },
             "hitbox": {
-                "x": 90,
-                "y": 75,
-                "width": 25,
-                "height": 10
+                "x": 32,
+                "y": 56,
+                "width": 7,
+                "height": 2
             }
         },
         {
@@ -66,17 +66,17 @@
             }
         },
         {
-            "name": "tree",
+            "name": "well",
             "sprite": {
-                "x": 20,
-                "y": 25,
-                "texture": "sprites/Arvore-1"
+                "x": 90,
+                "y": 75,
+                "texture": "well"
             },
             "hitbox": {
-                "x": 32,
-                "y": 56,
-                "width": 7,
-                "height": 2
+                "x": 90,
+                "y": 75,
+                "width": 25,
+                "height": 10
             }
         },
         {

@@ -24,14 +24,14 @@
         {
             "name": "tree",
             "sprite": {
-                "x": 5,
-                "y": 125,
-                "texture": "deadtree"
+                "x": 165,
+                "y": 10,
+                "texture": "sprites/Arvore-1"
             },
             "hitbox": {
-                "x": 12,
-                "y": 158,
-                "width": 4,
+                "x": 177,
+                "y": 41,
+                "width": 7,
                 "height": 2
             }
         },
@@ -66,14 +66,14 @@
         {
             "name": "tree",
             "sprite": {
-                "x": 165,
-                "y": 10,
-                "texture": "sprites/Arvore-1"
+                "x": 5,
+                "y": 125,
+                "texture": "deadtree"
             },
             "hitbox": {
-                "x": 177,
-                "y": 41,
-                "width": 7,
+                "x": 12,
+                "y": 158,
+                "width": 4,
                 "height": 2
             }
         }

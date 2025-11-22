@@ -30,20 +30,6 @@
     },
     "mapEntities": [
         {
-            "name": "tree",
-            "sprite": {
-                "x": 5,
-                "y": 55,
-                "texture": "sprites/Arvore-1"
-            },
-            "hitbox": {
-                "x": 17,
-                "y": 86,
-                "width": 7,
-                "height": 2
-            }
-        },
-        {
             "name": "house",
             "sprite": {
                 "x": 145,
@@ -55,6 +41,20 @@
                 "y": 15,
                 "width": 45,
                 "height": 40
+            }
+        },
+        {
+            "name": "tree",
+            "sprite": {
+                "x": 5,
+                "y": 55,
+                "texture": "sprites/Arvore-1"
+            },
+            "hitbox": {
+                "x": 17,
+                "y": 86,
+                "width": 7,
+                "height": 2
             }
         },
         {
