@@ -13,7 +13,7 @@ void Cutscene::loadJson(std::string jsonFile) {
 
     std::ifstream file(jsonFile);
     if (!file.is_open()) {
-        throw std::runtime_error("Could not open map file");
+        throw std::runtime_error("Could not open cutscene file");
     }
     file >> cutscene;
     file.close();
@@ -81,6 +81,8 @@ void Cutscene::update(float dt) {
 }
 
 void Cutscene::render(sf::RenderWindow& window) {
+    if (currentRepetition > repetitions) return;
+    
     int x {currentFrame * constants::xLogicPixels};
     sf::IntRect currentSprite({ x, 0 }, { constants::xLogicPixels, constants::yLogicPixels });
     sf::Texture& texture {resources.getTexture(spriteFile)};
