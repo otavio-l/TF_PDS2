@@ -56,6 +56,7 @@ void PlayState::update(float dt) {
 }
 
 void PlayState::render(sf::RenderWindow& window) {
+    bool drawn {false};
     for (auto& e : mapArea.mapEntities) {
 #ifdef DEBUG
         if (e.hasCollision) {
@@ -63,10 +64,24 @@ void PlayState::render(sf::RenderWindow& window) {
         }
 #endif
 #ifndef DEBUG
+        // To make this work the mapEntities must be in ascending order of bottom Y
         if (e.hasTexture) {
+            if (!drawn && e.hasCollision) {
+                float entityBottom {e.drawable.getPosition().y + e.drawable.getLocalBounds().getSize().y};
+                float playerBottom {
+                    mainCharacter.drawable.getPosition().y 
+                    + mainCharacter.drawable.getLocalBounds().getSize().y
+                };
+                if (playerBottom < entityBottom) {
+                    window.draw(mainCharacter.drawable);
+                    drawn = true;
+                }
+            }
             window.draw(e.drawable);
         }
 #endif
     }
-    window.draw(mainCharacter.drawable);
+    if (!drawn) {
+        window.draw(mainCharacter.drawable);
+    }
 }
