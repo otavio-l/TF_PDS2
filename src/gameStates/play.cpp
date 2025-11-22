@@ -2,9 +2,25 @@
 
 
 #include <fstream>
+#include <vector>
+#include <string>
 #include "gameStates.hpp"
 #include "constants.hpp"
 #include "game.hpp"
+
+
+static std::array<int, 3> mapLookup {
+    9,
+    2,
+    0
+};
+
+
+static std::array<std::string, 3> spawnLookup {
+    "right",
+    "below-church",
+    "down"
+};
 
 
 int readSave() {
@@ -26,11 +42,12 @@ PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resou
     resources.loadTexture("house");
     resources.loadTexture("well");
     resources.loadTexture("sprites/main_character");
-    
+
     mainCharacter = LiveEntity(resources.getTexture("sprites/main_character"));
     mainCharacter.drawable.setTextureRect(sf::IntRect(0, 0, 7, 20));
 
-    mapArea.newMap("maps/church.json", "right");
+    mapArea.newMap(mapLookup[(long unsigned int)mapArea.checkpoint], 
+                   spawnLookup[(long unsigned int)mapArea.checkpoint]);
 }
 
 void PlayState::handleInput(sf::Event& event) {
