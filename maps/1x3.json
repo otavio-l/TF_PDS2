@@ -35,6 +35,39 @@
                 "width": 53,
                 "height": 70
             }
+        },
+        {
+            "name": "checkpoint1",
+            "checkpoint": {
+                "min": 0,
+                "max": 0
+            },
+            "hitbox": {
+                "x": 129,
+                "y": 80,
+                "width": 10,
+                "height": 10
+            },
+            "trigger": {
+                "type": 3
+            }
+        },
+        {
+            "name": "cutscene",
+            "checkpoint": {
+                "min": 0,
+                "max": 1
+            },
+            "hitbox": {
+                "x": 129,
+                "y": 80,
+                "width": 10,
+                "height": 10
+            },
+            "trigger": {
+                "type": 2,
+                "targetSpawn": "cutscenes/introBixo.json"
+            }
         }
     ]
 }

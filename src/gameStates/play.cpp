@@ -51,7 +51,7 @@ void PlayState::handleInput(sf::Event& event) {
 }
 
 void PlayState::update(float dt) {
-    movePlayer(this->mainCharacter, mapArea);
+    movePlayer(this->mainCharacter, mapArea, game);
     mainCharacter.animate();
 }
 

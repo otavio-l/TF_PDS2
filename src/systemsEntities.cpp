@@ -1,5 +1,7 @@
 #include "systemsEntities.hpp"
+#include <fstream>
 #include "constants.hpp"
+#include "game.hpp"
 
 
 void continuousAction(sf::Event& event, LiveEntity& mainCharacter) {    
@@ -49,19 +51,49 @@ void updatePosition(LiveEntity& mainCharacter, float dx, float dy) {
     mainCharacter.hitbox.setPosition(hitboxPos);
 }
 
-void triggerDispatcher(MapEntity& e, MapArea& mapArea) {
+int readSave();
+void updateSave() {
+    int checkpoint {readSave()};
+    ++checkpoint;
+
+    // rewrite
+    std::ofstream out("checkpoint.txt", std::ios::trunc);
+    out << checkpoint;
+}
+
+void triggerDispatcher(MapEntity& e, MapArea& mapArea, Game& game, LiveEntity& mainCharacter) {
     switch (e.trigger.type)
     {
     case TriggerType::NEXT_MAP:
         mapArea.newMap(e.trigger.targetMap, e.trigger.targetSpawn);
         break;
-    
+
+    case TriggerType::CUTSCENE:
+        e.hasCollision = false;
+        e.hasTrigger = false;
+        game.actions.emplace_back(
+            PendingActionType::Push,
+            std::move(std::unique_ptr<Cutscene>(new Cutscene(game, e.trigger.targetSpawn)))
+        );
+        mainCharacter.direction.up = false;
+        mainCharacter.direction.down = false;
+        mainCharacter.direction.left = false;
+        mainCharacter.direction.right = false;
+        break;
+
+    case TriggerType::CHECKPOINT:
+        e.hasCollision = false;
+        e.hasTrigger = false;
+        ++mapArea.checkpoint;
+        updateSave();
+        break;
+
     default:
         break;
     }
 }
 
-void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea) {
+void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea, Game& game) {
     // TODO: Trigger entities still are treated as blocking
     bool collisionUp{false};
     bool collisionRight{false};
@@ -73,26 +105,26 @@ void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea) {
         if (!e.hasCollision && !e.hasTrigger) continue;
         bool currentCollision {false};
 
-        if (!collisionUp && mainCharacter.direction.up) {
+        if (mainCharacter.direction.up) {
             if (checkCollision(mainCharacter, e, 0, -constants::mainCharacterVelocity)) {
                 collisionUp = true;
                 currentCollision = true;
             }
         }
-        if (!collisionRight && mainCharacter.direction.right) {
+        if (mainCharacter.direction.right) {
             if (checkCollision(mainCharacter, e, constants::mainCharacterVelocity, 0)) {
                 collisionRight = true;
                 currentCollision = true;
             }
         }
-        if (!collisionDown && mainCharacter.direction.down) {
+        if (mainCharacter.direction.down) {
             if (checkCollision(mainCharacter, e, 0, constants::mainCharacterVelocity)) {
                 collisionDown = true;
                 currentCollision = true;
             }
             
         }
-        if (!collisionLeft && mainCharacter.direction.left) {
+        if (mainCharacter.direction.left) {
             if (checkCollision(mainCharacter, e, -constants::mainCharacterVelocity, 0)) {
                 collisionLeft = true;
                 currentCollision = true;
@@ -100,8 +132,7 @@ void movePlayer(LiveEntity& mainCharacter, MapArea& mapArea) {
         }
 
         if (currentCollision && e.hasTrigger) {
-            triggerDispatcher(e, mapArea);
-            return;
+            triggerDispatcher(e, mapArea, game, mainCharacter);
         }
     }
 

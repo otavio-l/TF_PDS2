@@ -9,7 +9,8 @@
 enum class TriggerType {
     NONE,
     NEXT_MAP,
-    CUTSCENE
+    CUTSCENE,
+    CHECKPOINT
 };
 
 
@@ -49,5 +50,6 @@ struct MapEntity: public Entity {
     bool hasTexture;
     Trigger trigger;
 };
+
 
 #endif
