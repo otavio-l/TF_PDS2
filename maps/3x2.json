@@ -9,21 +9,21 @@
         "left-wall": {
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/3x1.json",
+                "targetMap": 6,
                 "targetSpawn": "right"
             }
         },
         "up-wall": {
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/2x2.json",
+                "targetMap": 4,
                 "targetSpawn": "down"
             }
         },
         "right-wall": {
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/3x3.json",
+                "targetMap": 8,
                 "targetSpawn": "left"
             }
         }

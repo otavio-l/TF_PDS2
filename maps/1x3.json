@@ -3,20 +3,20 @@
     "spawn": {
         "left": {},
         "down": {},
-        "below-church": {"x": 129, "y": 80}
+        "below-church": {"x": 513, "y": 80}
     },
     "walls": {
         "left-wall": {
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/1x2.json",
+                "targetMap": 1,
                 "targetSpawn": "right"
             }
         },
         "down-wall": {
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/2x3.json",
+                "targetMap": 5,
                 "targetSpawn": "up"
             }
         }

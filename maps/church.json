@@ -1,7 +1,7 @@
 {
     "type": "interior",
     "spawn": {
-        "right": {"x": 137, "y": 27}
+        "right": {"x": 716, "y": 27}
     },
     "background": "church",
     "mapEntities": [
@@ -60,7 +60,7 @@
             },
             "trigger": {
                 "type": 1,
-                "targetMap": "maps/1x3.json",
+                "targetMap": 2,
                 "targetSpawn": "below-church"
             }
         },
