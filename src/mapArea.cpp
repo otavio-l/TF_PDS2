@@ -1,5 +1,5 @@
 // # define NDEBUG
-constexpr int SPAWN_FLAG = 1337;
+constexpr float SPAWN_FLAG = 1337.0f;
 
 
 #include "mapArea.hpp"
@@ -7,6 +7,7 @@ constexpr int SPAWN_FLAG = 1337;
 #include <fstream>
 #include <cassert>
 #include <climits>
+#include <cmath>
 #include "constants.hpp"
 
 
@@ -58,42 +59,42 @@ void MapArea::loadCurrentSpawn(int targetMap, std::string targetSpawn) {
     assert (mapData["spawn"].contains(targetSpawn));
     assert (SPAWN_FLAG > (constants::xLogicPixels * 4));
 
-    int absoluteX = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
-    int absoluteY = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
+    float absoluteX = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
+    float absoluteY = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
 
     if (absoluteX == SPAWN_FLAG) {
         // it doens't work for church.json, it's outside main map;
         int screenX {targetMap / 3};
         int screenY {targetMap % 3};
-        int offsetX {constants::xLogicPixels * screenY};
-        int offsetY {constants::yLogicPixels * screenX};
+        float offsetX {static_cast<float>(constants::xLogicPixels * screenY)};
+        float offsetY {static_cast<float>(constants::yLogicPixels * screenX)};
 
         if (targetSpawn == "left") {
-            absoluteX = 1 + offsetX;
-            absoluteY = 70 + offsetY;
+            absoluteX = 1.0f + offsetX;
+            absoluteY = 70.0f + offsetY;
         }
         else if (targetSpawn == "right") {
-            absoluteX = 183 + offsetX;
-            absoluteY = 60 + offsetY;
+            absoluteX = 183.0f + offsetX;
+            absoluteY = 60.0f + offsetY;
         }
         else if (targetSpawn == "up") {
-            absoluteX = 90 + offsetX;
-            absoluteY = 1 + offsetY;
+            absoluteX = 90.0f + offsetX;
+            absoluteY = 1.0f + offsetY;
         }
         else if (targetSpawn == "down") {
-            absoluteX = 90 + offsetX;
-            absoluteY = 138 + offsetY;
+            absoluteX = 90.0f + offsetX;
+            absoluteY = 138.0f + offsetY;
         }
         else {
             throw std::runtime_error("Unspecified map spawn");
         }
     }
 
-    mainCharacter.absX = static_cast<float>(absoluteX);
-    mainCharacter.absY = static_cast<float>(absoluteY);
+    mainCharacter.absX = absoluteX;
+    mainCharacter.absY = absoluteY;
 
-    float relativeX { static_cast<float>( absoluteX % constants::xLogicPixels ) };
-    float relativeY { static_cast<float>( absoluteY % constants::yLogicPixels ) };
+    float relativeX { fmodf( absoluteX , constants::xLogicPixels ) };
+    float relativeY { fmodf( absoluteY , constants::yLogicPixels ) };
     mainCharacter.drawable.setPosition(relativeX, relativeY);
     mainCharacter.hitbox.setPosition(relativeX, relativeY);
 }
