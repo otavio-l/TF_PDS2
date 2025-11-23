@@ -1,5 +1,6 @@
 #include "gameStates.hpp"
 #include "game.hpp"
+#include "checkpoint.hpp"
 
 
 sf::Sprite& Button::getSprite() {
@@ -48,6 +49,13 @@ void MenuState::handleInput(sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::Enter) {
             if (button.getButton() == SelectedMenuButton::PLAY) {
+                game.actions.emplace_back(
+                    PendingActionType::Change, 
+                    std::move(std::unique_ptr<PlayState>(new PlayState(game)))
+                );
+            }
+            if (button.getButton() == SelectedMenuButton::NEW_GAME) {
+                updateSave("checkpoint.txt", 0);
                 game.actions.emplace_back(
                     PendingActionType::Change, 
                     std::move(std::unique_ptr<PlayState>(new PlayState(game)))
