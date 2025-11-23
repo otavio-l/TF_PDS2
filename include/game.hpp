@@ -26,23 +26,31 @@ struct PendingAction {
 
 
 /**
-* @brief Controla o loop principal do jogo e a janela.
-* 
-* Lida com a criação de janelas, atualizações de estado, entrada e renderização.
-*/
+ * @brief Controla o loop principal do jogo e a janela
+ * 
+ */
 class Game {
-    // sf::RenderWindow window;
-    //SMART POINTER: quando currentState for ser esquecida (saiu do escopo), chama delete para o obj
-    // std::unique_ptr<GameState> currentState;
     std::vector<std::unique_ptr<GameState>> stateStack;
 
+    /**
+     * @brief Trata as requisições de alteração de estado do jogo
+     * 
+     */
     void maintainStates();
 public:
     sf::RenderWindow window;
     std::list<PendingAction> actions;
-//! Inicializa o jogo e cria a janela principal.
+
+    /**
+     * @brief Inicializa a janela e o estado atual do jogo
+     * 
+     */
     Game();
-//! Executa o loop principal do jogo.
+
+    /**
+     * @brief Executa o loop principal do jogo
+     * 
+     */
     void run();
 };
 

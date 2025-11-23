@@ -1,3 +1,5 @@
 /build/*
 !/build/.gitkeep
 /game
+/docs/*
+!/docs/.gitkeep

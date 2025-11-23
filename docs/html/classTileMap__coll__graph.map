@@ -1,7 +1,0 @@
-<map id="TileMap" name="TileMap">
-<area shape="rect" id="Node000001" title="Representa um mapa de blocos 2D que pode ser renderizado com eficiência." alt="" coords="90,79,165,104"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,108,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,39,118,77,114,80,76,43"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="132,5,267,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="179,43,141,80,137,77,176,39"/>
-</map>

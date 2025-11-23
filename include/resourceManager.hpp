@@ -15,16 +15,16 @@ class ResourceManager {
     std::unordered_map<std::string, sf::SoundBuffer> sounds;
 
 public:
-/**
-* @brief Carrega uma textura de um arquivo.
-* @param name Identificador da textura.
-* @param filename Caminho para o arquivo.
-*/
+    /**
+    * @brief Carrega uma textura de um arquivo
+    * @param filename nome do arquivo
+    */
     void loadTexture(const std::string& filename);
-/**
-* @brief Retorna uma textura carregada anteriormente.
-* @param name Identificador da textura.
-*/   
+    
+    /**
+    * @brief Retorna uma textura carregada anteriormente
+    * @param name Identificador da textura
+    */   
     sf::Texture& getTexture(const std::string& name);
 };
 

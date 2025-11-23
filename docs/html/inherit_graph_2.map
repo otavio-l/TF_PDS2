@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classGameState.html" title="Classe base abstrata para diferentes estados do jogo." alt="" coords="5,55,100,80"/>
-<area shape="rect" id="Node000001" href="$classMenuState.html" title="Representa o estado do menu principal." alt="" coords="153,5,245,31"/>
-<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="103,48,160,28,161,33,105,53"/>
-<area shape="rect" id="Node000002" href="$classPausedState.html" title="Representa o estado de pausa." alt="" coords="148,55,251,80"/>
-<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="114,65,148,65,148,70,114,70"/>
-<area shape="rect" id="Node000003" href="$classPlayState.html" title="Representa o estado do jogo." alt="" coords="157,104,241,129"/>
-<area shape="poly" id="edge3_Node000000_Node000003" title=" " alt="" coords="105,82,161,101,160,106,103,87"/>
-</map>

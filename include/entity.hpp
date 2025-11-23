@@ -45,7 +45,11 @@ struct LiveEntity: public Entity {
     int animateCounter;
     float absX;
     float absY;
-    virtual void move();
+
+    /**
+     * @brief Atualiza a textura da entidade com a movimentação
+     * 
+     */
     void animate();
 
     LiveEntity();
@@ -54,6 +58,12 @@ struct LiveEntity: public Entity {
 };
 
 struct PlayerEntity: public LiveEntity {
+    /**
+     * @brief Move o player se não houver colisões
+     * 
+     * @param collisions Direções das movimentações proibidas
+     * @param velocity velocidade da enridade
+     */
     void move(Direction collisions, float velocity);
 
     PlayerEntity();
@@ -62,9 +72,24 @@ struct PlayerEntity: public LiveEntity {
 
 struct EnemyEntity: public LiveEntity {
     bool onScreen;
+
+    /**
+     * @brief Calcula se o inimigo está na tela atual e atualiza suas posições relativas
+     * 
+     * @param mainCharacter Entidade base para tela atual
+     */
     void currentScreen(LiveEntity &mainCharacter);
+    /**
+     * @brief Calcula as próximas direções do inimgo
+     * 
+     * @param mainCharacter Alvo da direção
+     */
     void setFollowing(LiveEntity &mainCharacter);
-    void move() override;
+    /**
+     * @brief Move o inimigo estando ou não na tela atual
+     * 
+     */
+    void move();
     
     EnemyEntity();
     EnemyEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);

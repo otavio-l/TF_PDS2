@@ -21,8 +21,6 @@ LiveEntity::LiveEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, f
     hitbox.setSize(size);
 }
 
-void LiveEntity::move() {}
-
 void LiveEntity::animate() {
     if (direction.up || direction.down || direction.left || direction.right) {
         animateCounter = (animateCounter + 1) % (constants::fps / 2); // troca de frame a cada 0.5s
