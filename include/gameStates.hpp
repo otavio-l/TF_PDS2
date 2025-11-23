@@ -6,7 +6,6 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "resourceManager.hpp"
-#include "systemsEntities.hpp"
 #include "mapArea.hpp"
 
 
