@@ -9,34 +9,11 @@
 #include "collision.hpp"
 #include "constants.hpp"
 #include "game.hpp"
+#include "checkpoint.hpp"
 
 
-static std::array<int, 3> mapLookup {
-    9,
-    2,
-    0
-};
-
-
-static std::array<std::string, 3> spawnLookup {
-    "right",
-    "below-church",
-    "down"
-};
-
-
-int readSave() {
-    // TODO: exception when file doesn't exist
-    std::fstream file("checkpoint.txt", std::ios::in);
-    int checkpoint;
-    file >> checkpoint;
-    file.close();
-
-    return checkpoint;
-}
-
-
-PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, readSave()) {
+PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resources, 
+readSave("checkpoint.txt")) {
     resources.loadTexture("sprites/Arvore-1");
     resources.loadTexture("church");
     resources.loadTexture("ext_church");

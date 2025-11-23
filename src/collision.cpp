@@ -1,6 +1,7 @@
 #include "collision.hpp"
 #include <fstream>
 #include "game.hpp"
+#include "checkpoint.hpp"
 
 
 bool checkCollision(Entity& mainCharacter, Entity& e, float dx, float dy) {
@@ -91,7 +92,7 @@ void triggerDispatcher(MapEntity& e, MapArea& mapArea, Game& game, LiveEntity& m
         e.hasCollision = false;
         e.hasTrigger = false;
         ++mapArea.checkpoint;
-        updateSave(mapArea);
+        updateSave("checkpoint.txt", mapArea.checkpoint);
         break;
 
     default:
