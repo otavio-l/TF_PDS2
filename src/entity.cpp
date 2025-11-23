@@ -1,5 +1,7 @@
 #include "entity.hpp"
+#include <cmath>
 #include "constants.hpp"
+#include "movement.hpp"
 
 
 LiveEntity::LiveEntity() {}
@@ -69,6 +71,20 @@ PlayerEntity::PlayerEntity() {}
 PlayerEntity::PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
     float sizeY) : LiveEntity(spriteSheet, posAbsX, posAbsY, sizeX, sizeY) {}
 
+void PlayerEntity::move(Direction collisions, float velocity) {
+    if (this->direction.up && !collisions.up) {
+        updatePosition(*this, 0, -velocity);
+    }
+    if (this->direction.right && !collisions.right) {
+        updatePosition(*this, velocity, 0);
+    }
+    if (this->direction.left && !collisions.left) {
+        updatePosition(*this, -velocity, 0);
+    }
+    if (this->direction.down && !collisions.down) {
+        updatePosition(*this, 0, velocity);
+    }
+}
 
 
 EnemyEntity::EnemyEntity() {}
@@ -76,3 +92,99 @@ EnemyEntity::EnemyEntity() {}
 EnemyEntity::EnemyEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
     float sizeY) : LiveEntity(spriteSheet, posAbsX, posAbsY, sizeX, sizeY), onScreen(false) {}
 
+void EnemyEntity::currentScreen(LiveEntity &mainCharacter) {
+    // when the leftmost upmost vertice is not in screen but the enemy is, the enemy needs negative
+    // relative coordinates
+    int characterScreenX { (int)mainCharacter.absX / constants::xLogicPixels };
+    int characterScreenY { (int)mainCharacter.absY / constants::yLogicPixels };
+
+    bool sameColumn {
+        ((int)this->absX / constants::xLogicPixels) == characterScreenX
+    };
+    bool sameLine {
+        ((int)this->absY / constants::yLogicPixels) == characterScreenY
+    };
+
+
+    bool upLeftOnScreen { sameColumn && sameLine };
+
+    bool upRightOnScreen {
+            ((int)(absX + hitbox.getSize().x) / constants::xLogicPixels) == characterScreenX
+        && 
+            sameLine
+    };
+
+    bool downLeftOnScreen {
+            sameColumn
+        &&
+            ((int)(absY + hitbox.getSize().y) / constants::yLogicPixels) == characterScreenY
+    };
+    
+
+    onScreen = upLeftOnScreen || downLeftOnScreen || upRightOnScreen;
+    float relX { fmodf(absX, constants::xLogicPixels) };
+    float relY { fmodf(absY, constants::yLogicPixels) };
+    float finalX {relX};
+    float finalY {relY};
+    
+    if (!upLeftOnScreen && downLeftOnScreen) {
+        finalY = -constants::yLogicPixels + relY;
+    }
+    else if (!upLeftOnScreen && upRightOnScreen) {
+        finalX = -constants::xLogicPixels + relX;
+    }
+    hitbox.setPosition(finalX, finalY);
+    drawable.setPosition(finalX, finalY);
+}
+
+void EnemyEntity::setFollowing(LiveEntity &mainCharacter) {
+    if (mainCharacter.absX > absX) {
+        direction.right = true;
+        direction.left = false;
+    }
+    else if (fabs(mainCharacter.absX - absX) < constants::enemyVelocity) {
+        direction.right = false;
+        direction.left = false;
+    }
+    else {
+        direction.right = false;
+        direction.left = true;
+    }
+
+    if (mainCharacter.absY > absY) {
+        direction.down = true;
+        direction.up = false;
+    }
+    else if (fabs(mainCharacter.absY - absY) < constants::enemyVelocity) {
+        direction.down = false;
+        direction.up = false;
+    }
+    else {
+        direction.down = false;
+        direction.up = true;
+    }
+}
+
+void EnemyEntity::move() {
+    float dx {0.0f};
+    if (direction.left) {
+        dx = -constants::enemyVelocity;
+    }
+    else if (direction.right) {
+        dx = constants::enemyVelocity;
+    }
+    float dy{0.0f};
+    if (direction.up) {
+        dy = -constants::enemyVelocity;
+    }
+    else if (direction.down) {
+        dy = constants::enemyVelocity;
+    }
+    if (onScreen) {
+        updatePosition(*this, dx, dy);
+    }
+    else {
+        absX += dx;
+        absY += dy;
+    }
+}

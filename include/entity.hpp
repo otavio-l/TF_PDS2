@@ -54,11 +54,18 @@ struct LiveEntity: public Entity {
 };
 
 struct PlayerEntity: public LiveEntity {
+    void move(Direction collisions, float velocity);
+
     PlayerEntity();
     PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
 };
 
 struct EnemyEntity: public LiveEntity {
+    bool onScreen;
+    void currentScreen(LiveEntity &mainCharacter);
+    void setFollowing(LiveEntity &mainCharacter);
+    void move() override;
+    
     EnemyEntity();
     EnemyEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
 };

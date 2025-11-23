@@ -1,10 +1,12 @@
 // #define DEBUG
 
 
+#include "gameStates.hpp"
 #include <fstream>
 #include <vector>
 #include <string>
-#include "gameStates.hpp"
+#include "movement.hpp"
+#include "collision.hpp"
 #include "constants.hpp"
 #include "game.hpp"
 
@@ -78,8 +80,27 @@ void PlayState::handleInput(sf::Event& event) {
 }
 
 void PlayState::update(float dt) {
-    movePlayer(this->mainCharacter, mapArea, game);
+    Direction collisions { 
+        collisionReaction(mainCharacter, mapArea, game, constants::mainCharacterVelocity)
+    };
+
+    mainCharacter.move(collisions, constants::mainCharacterVelocity);
     mainCharacter.animate();
+
+    if (mapArea.checkpoint != 2) return;
+
+    enemy.setFollowing(mainCharacter);
+
+    enemy.currentScreen(mainCharacter);
+    // if (enemy.onScreen) {
+        // enemy.animate()
+    // }
+    enemy.move();
+
+    if (checkCollision(enemy, mainCharacter, 0, 0)) {
+        // TODO: GAME OVER
+    }
+    
 }
 
 void PlayState::render(sf::RenderWindow& window) {
@@ -110,5 +131,8 @@ void PlayState::render(sf::RenderWindow& window) {
     }
     if (!drawn) {
         window.draw(mainCharacter.drawable);
+    }
+    if (enemy.onScreen) {
+        window.draw(enemy.hitbox);
     }
 }
