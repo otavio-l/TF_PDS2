@@ -33,17 +33,6 @@ struct Entity {
     sf::RectangleShape hitbox;
 };
 
-struct LiveEntity: public Entity {
-    Direction direction;
-    int animateCounter;
-    float absX;
-    float absY;
-
-    LiveEntity();
-    LiveEntity(sf::Texture& spriteSheet);
-    void animate();
-};
-
 struct MapEntity: public Entity {
     bool hasCollision;
     bool hasTrigger;
@@ -51,5 +40,27 @@ struct MapEntity: public Entity {
     Trigger trigger;
 };
 
+struct LiveEntity: public Entity {
+    Direction direction;
+    int animateCounter;
+    float absX;
+    float absY;
+    virtual void move();
+    void animate();
+
+    LiveEntity();
+    LiveEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
+    virtual ~LiveEntity() = default;
+};
+
+struct PlayerEntity: public LiveEntity {
+    PlayerEntity();
+    PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
+};
+
+struct EnemyEntity: public LiveEntity {
+    EnemyEntity();
+    EnemyEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
+};
 
 #endif

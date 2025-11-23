@@ -14,6 +14,13 @@ namespace constants {
     constexpr int mainHeight{20};
     constexpr int mainWidth{7};
 
+    constexpr float enemyVelocity{0.5};
+    constexpr float enemyPosAbsX{394.0f};
+    constexpr float enemyPosAbsY{120.0f};
+    constexpr float enemyWidth{15.0f};
+    constexpr float enemyHeight{30.0f};
+    
+
     // Compatibility reasons
     constexpr int tileSizePixels{32};
     constexpr int xTiles{30};

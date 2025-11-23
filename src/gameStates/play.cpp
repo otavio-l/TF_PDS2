@@ -43,11 +43,21 @@ PlayState::PlayState(Game &game) : GameState(game), mapArea(mainCharacter, resou
     resources.loadTexture("well");
     resources.loadTexture("sprites/main_character");
 
-    mainCharacter = LiveEntity(resources.getTexture("sprites/main_character"));
+    mainCharacter = PlayerEntity(
+        resources.getTexture("sprites/main_character"),
+        80.0f, 100.0f, 
+        constants::mainWidth, constants::mainHeight
+    );
     mainCharacter.drawable.setTextureRect(sf::IntRect(0, 0, 7, 20));
 
     mapArea.newMap(mapLookup[(long unsigned int)mapArea.checkpoint], 
                    spawnLookup[(long unsigned int)mapArea.checkpoint]);
+
+    enemy = EnemyEntity(
+        resources.getTexture("sprites/main_character"), 
+        constants::enemyPosAbsX, constants::enemyPosAbsY, 
+        constants::enemyWidth, constants::enemyHeight
+    );
 }
 
 void PlayState::handleInput(sf::Event& event) {

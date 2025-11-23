@@ -66,8 +66,9 @@ public:
 
 //! Representa o estado do jogo.
 class PlayState : public GameState {
-    LiveEntity mainCharacter;
+    PlayerEntity mainCharacter;
     MapArea mapArea;
+    EnemyEntity enemy;
 public:
     PlayState(Game &game);
     void handleInput(sf::Event& event) override;

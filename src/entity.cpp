@@ -1,13 +1,25 @@
 #include "entity.hpp"
 #include "constants.hpp"
 
-LiveEntity::LiveEntity() : Entity(), direction{false, false, false, false}, animateCounter(0) {}
 
-LiveEntity::LiveEntity(sf::Texture& spriteSheet) : Entity(), direction{false, false, false, false}, animateCounter(0) {
+LiveEntity::LiveEntity() {}
+
+LiveEntity::LiveEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
+    float sizeY) : direction{false, false, false, false}, animateCounter(0), 
+    absX(posAbsX), absY(posAbsY) {
+    
     drawable.setTexture(spriteSheet);
-    hitbox.setPosition(100.0f, 80.0f);
-    hitbox.setSize({constants::mainWidth, constants::mainHeight});
+
+    float relX = { fmodf(absX, constants::xLogicPixels) };
+    float relY = { fmodf(absY, constants::yLogicPixels) };
+    hitbox.setPosition(relX, relY);
+    drawable.setPosition(relX, relY);
+
+    const sf::Vector2f size(sizeX, sizeY);
+    hitbox.setSize(size);
 }
+
+void LiveEntity::move() {}
 
 void LiveEntity::animate() {
     if (direction.up || direction.down || direction.left || direction.right) {
@@ -50,3 +62,17 @@ void LiveEntity::animate() {
         }
     }
 }
+
+
+PlayerEntity::PlayerEntity() {}
+
+PlayerEntity::PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
+    float sizeY) : LiveEntity(spriteSheet, posAbsX, posAbsY, sizeX, sizeY) {}
+
+
+
+EnemyEntity::EnemyEntity() {}
+
+EnemyEntity::EnemyEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
+    float sizeY) : LiveEntity(spriteSheet, posAbsX, posAbsY, sizeX, sizeY), onScreen(false) {}
+
