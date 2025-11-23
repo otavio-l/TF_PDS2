@@ -1,16 +1,55 @@
 # README - JOGO - GRUPO 4 TURMA TN
 
-### Participantes: Cauã M., Hugo S., Murilo N. e Otávio L.
+Trabalho final de PDS2/2025-2 da UFMG, **integrantes**: Cauã M., Hugo S., Murilo N. e Otavio L.
 
-  **Descrição** - O presente projeto trata da elaboração de um jogo 2D, com estilo artístico em pixel-art e visualização top-down.
-O jogador controlará um personagem que está a escapar de uma dungeon, e para tanto, deverá resolver puzzles e escapar de inimigos,
-finalizando o jogo no momento em que foge da masmorra. O jogo contará com menus, um mapa e sistemas de câmera e de puzzles, sendo
-possível finalizá-lo em apenas alguns minutos de jogatina.
+O projeto trata da elaboração de uma demo de jogo 2D com estilo 8-bit e visualização top-down.
 
-  **Objetivos** - Produzir um jogo 2D com sistemas completos e originais de puzzle, movimentação, colisão, gerenciamento de recursos
-e renderização, por meio da utilização da biblioteca SFML (utilizada para a criação de games em C++).
 
-  **Motivação** - O grupo escolheu trabalhar com o desenvolvimento de um jogo em razão da curiosidade dos integrantes a respeito do tema.
-A criação de jogos é um assunto com o qual o grupo apresenta certa familiaridade, uma vez que os membros já trabalharam em um jogo simples
-na linguagem C. Com o projeto em questão, os integrantes enxergam uma oportunidade de aprofundar os seus conhecimentos sobre o desenvolvimento
-de games.
+## Objetivos
+Produzir um jogo 2D com menu, pause, checkpoints, movimentação, colisão, gerenciamento 
+de recursos, profundidade na renderização, cutscenes, mapas interativos e animação dos personagens
+seguindo as boas práticas de programação.
+> Inspirado em "Faith: The Unholy Trinity"
+
+## Ferramentas
+Esse projeto utiliza as seguintes linguagem, ferramentas e bibliotecas:
+- Linguagem: C++11
+- Compilação: Make
+- Gerenciador de pacotes: Conan (versão: 2.20.1)
+- Biblioteca: [SFML](https://github.com/SFML/SFML)(versão: 2.6.1), [JSON](https://github.com/nlohmann/json)(versão: 3.12.0)
+- Documentação: Doxygen (versão: 1.14.0)
+- Testes Unitários: Doctest
+- Cobertura: gcovr
+
+## Compilação
+> Esteja no diretório root do projeto
+
+> Primeira vez usando o conan execute `$ conan profile detect`
+
+`$ conan install . --lockfile=conan.lock --output-folder=build --build=missing -c tools.system.package_manager:mode=install`
+
+`$ make`
+
+## Execução
+`$ make run`
+
+## Compilação de Testes
+`$ make tests`
+
+## Execução Testes
+`$ make run_tests`
+
+## Relatório de Cobertura
+Para imprimir o relatório no terminal
+`$ make coverage`
+
+Para gerar o relatório em HTML 
+`$ make html_coverage`
+
+## Documentação
+`$ doxygen Doxyfile`
+> Arquivos gerados no diretório docs/
+
+## Remover arquivos auxiliares
+`$ make clean`
+.
