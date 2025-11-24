@@ -75,7 +75,10 @@ void PlayState::update(float dt) {
     enemy.move();
 
     if (checkCollision(enemy, mainCharacter, 0, 0)) {
-        // TODO: GAME OVER
+        game.actions.emplace_back(
+            PendingActionType::Change,
+            std::move(std::unique_ptr<GameOverState>(new GameOverState(game)))
+        );
     }
     
 }

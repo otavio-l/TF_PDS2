@@ -204,4 +204,17 @@ public:
     void render(sf::RenderWindow& window) override;
 };
 
+class GameOverState : public GameState {
+    sf::Sprite background;
+public:
+    GameOverState(Game &game);
+    /**
+     * @brief Trata do input para retornar ao jogo
+     * 
+     * @param event Evento do SFML
+     */
+    void handleInput(sf::Event& event) override;
+    void render(sf::RenderWindow& window) override;
+};
+
 #endif
