@@ -3,3 +3,5 @@
 /game
 /docs/*
 !/docs/.gitkeep
+/coverage/*
+!/coverage/.gitkeep
