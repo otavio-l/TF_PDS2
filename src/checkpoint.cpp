@@ -16,8 +16,10 @@ std::array<std::string, 3> spawnLookup {
 
 
 int readSave(std::string fileName) {
-    // TODO: exception when file doesn't exist
     std::fstream file(fileName, std::ios::in);
+    if (!file) {
+        throw std::runtime_error(fileName + " could not be opened");
+    }
     int checkpoint;
     file >> checkpoint;
     file.close();
@@ -27,5 +29,8 @@ int readSave(std::string fileName) {
 
 void updateSave(std::string fileName, int newCheckpoint) {
     std::ofstream out(fileName, std::ios::trunc);
+    if (!out) {
+        throw std::runtime_error(fileName + " could not be opened");
+    }
     out << newCheckpoint;
 }

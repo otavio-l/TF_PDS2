@@ -20,7 +20,7 @@ void Game::maintainStates() {
         {
         case PendingActionType::Push:
             if (!action.state) {
-                throw std::logic_error("Novo estado é vazio");
+                throw std::logic_error("New game state is invalid");
             }
             stateStack.push_back(std::move(action.state));
             break;
@@ -29,13 +29,13 @@ void Game::maintainStates() {
             break;
         case PendingActionType::Change:
             if (!action.state) {
-                throw std::logic_error("Novo estado é vazio");
+                throw std::logic_error("New game state is invalid");
             }
             stateStack.pop_back();
             stateStack.push_back(std::move(action.state));
             break;
         default:
-            break;
+            throw std::logic_error("Invalid game state change");
         }
 
         actions.pop_front();

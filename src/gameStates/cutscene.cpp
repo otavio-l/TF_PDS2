@@ -13,14 +13,14 @@ void Cutscene::loadJson(std::string jsonFile) {
 
     std::ifstream file(jsonFile);
     if (!file.is_open()) {
-        throw std::runtime_error("Could not open cutscene file");
+        throw std::runtime_error("Could not open cutscene file: " + jsonFile);
     }
     file >> cutscene;
     file.close();
 
     this->spriteFile = cutscene.value("file", "");
     if (this->spriteFile.empty()) {
-        throw std::runtime_error("Config file for cutscene doesn't have the image");
+        throw std::runtime_error("Config file for cutscene doesn't have the image path");
     }
     this->intervalSec = cutscene.value("intervalSec", 0.5f);
     this->repetitions = cutscene.value("repetitions", 1);

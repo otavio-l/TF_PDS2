@@ -60,11 +60,6 @@ Direction collisionReaction(LiveEntity& mainCharacter, MapArea& mapArea, Game& g
     return collisions;
 }
 
-void updateSave(MapArea& mapArea) {
-    std::ofstream out("checkpoint.txt", std::ios::trunc);
-    out << mapArea.checkpoint;
-}
-
 void triggerDispatcher(MapEntity& e, MapArea& mapArea, Game& game, LiveEntity& mainCharacter) {
     switch (e.trigger.type)
     {
@@ -96,6 +91,7 @@ void triggerDispatcher(MapEntity& e, MapArea& mapArea, Game& game, LiveEntity& m
         break;
 
     default:
+        throw std::logic_error("Empty entity trigger");
         break;
     }
 }

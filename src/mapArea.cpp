@@ -45,7 +45,7 @@ void MapArea::newMap(int targetMap, std::string currentSpawn) {
 nlohmann::json MapArea::loadJson(std::string jsonFile)  {
     std::ifstream file(jsonFile);
     if (!file.is_open()) {
-        throw std::runtime_error("Could not open map file");
+        throw std::runtime_error("Could not open map file: " + jsonFile);
     }
     nlohmann::json j;
     file >> j;
@@ -56,11 +56,11 @@ nlohmann::json MapArea::loadJson(std::string jsonFile)  {
 void MapArea::loadCurrentSpawn(int targetMap, std::string targetSpawn) {
     // define default spawn coordinates if not specified in json
     if (!mapData["spawn"].contains(targetSpawn)) {
-        throw std::runtime_error("Map doesn't have spawn");
+        throw std::runtime_error("Map doesn't have spawn: " + targetSpawn);
     }
-    if (!SPAWN_FLAG > (constants::xLogicPixels * 4)) {
-        throw std::range_error("Value " + std::to_string(SPAWN_FLAG) 
-            + "used as flag isn't out of range");
+    if (SPAWN_FLAG <= (constants::xLogicPixels * 4)) {
+        throw std::logic_error("Value " + std::to_string(SPAWN_FLAG) 
+            + "used as flag isn't out of possible range");
     };
 
     float absoluteX = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
@@ -90,7 +90,7 @@ void MapArea::loadCurrentSpawn(int targetMap, std::string targetSpawn) {
             absoluteY = 138.0f + offsetY;
         }
         else {
-            throw std::runtime_error("Unspecified map spawn");
+            throw std::runtime_error("Map spawn doesn't have default coordinates: targetSpawn");
         }
     }
 
@@ -172,7 +172,7 @@ void MapArea::loadWalls() {
 
 void MapArea::loadmapEntities() {
     if (!mapData.contains("mapEntities")) {
-        throw std::runtime_error("JSON file doesn't have entities");
+        throw std::runtime_error("JSON file doesn't have map entities");
     }
 
     for (const auto& e : mapData["mapEntities"]) {
