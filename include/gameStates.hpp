@@ -147,6 +147,7 @@ public:
  * 
  */
 class PausedState : public GameState {
+    sf::Sprite background;
 public:
     PausedState(Game &game);
     /**

@@ -3,7 +3,8 @@
 
 
 PausedState::PausedState(Game &game) : GameState(game) {
-    // TODO: resources.loadTexture();
+    resources.loadTexture("paused");
+    background.setTexture(resources.getTexture("paused"));
 }
 
 void PausedState::handleInput(sf::Event& event) {
@@ -17,4 +18,6 @@ void PausedState::handleInput(sf::Event& event) {
     }
 }
 
-void PausedState::render(sf::RenderWindow& window) {}
+void PausedState::render(sf::RenderWindow& window) {
+    window.draw(background);
+}
