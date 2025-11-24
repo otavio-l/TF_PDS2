@@ -1,20 +1,19 @@
 ## CARTÕES CRC
 
-#### Classe: Entity
+#### Classe: PlayerEntity
 
 Responsabilidades:
 
-- Posição
+- Posição relativa
+- Posição absoluta
 - Sprite
 - Hitbox
-- Colisão
-- Gatilho
+- Movimentação
+- Animação
 
 Colaborações:
 
-- Game
 - MapArea
-- InputSystem
 - PlayState
 
 ---
@@ -31,8 +30,7 @@ Responsabilidades:
 
 Colaborações:
 
-- Game
-- InputSystem
+- Entity
 - PlayState
 
 
@@ -69,28 +67,9 @@ Responsabilidades
 
 Colaborações:
 
-- InputSystem
 - ResourceManager
-- Entity
+- PlayerEntity
 - Game
-
----
-
-#### Classe: InputSystem
-
-Responsabilidades
-
-- Movimento potencial do player
-- Checagem de colisão
-- Checagem de gatilho
-- Carrega novo mapa
-- Atualiza hitbox e sprite do player
-
-Colaborações:
-
-- PlayState
-- Entity
-- MapArea
 
 ---
 
@@ -110,3 +89,21 @@ Colaborações:
 - PlayState
 - PausedState
 
+---
+
+#### Classe: EnemyEntity
+
+Responsabilidades
+
+- Posição relativa
+- Posição absoluta
+- Sprite
+- Hitbox
+- Calcula se está no mapa atual
+- Calcula movimento para seguir o player
+
+Colaborações:
+
+- PlayState
+- Entity
+- MapArea
