@@ -9,6 +9,8 @@ SRCS := $(shell find $(SRC_DIR) -name "*.cpp") # inclui recursivamente todos os 
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o) # troca a extensao .cpp por .o para gerar a lista de objetos
 TEST_SRCS := $(shell find $(TEST_DIR) -name "*.cpp")
 TEST_OBJS := $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(BUILD_DIR)/tests/%.o)
+OBJS_NO_MAIN := $(filter-out $(BUILD_DIR)/main.o, $(OBJS)) # todos os objetos exceto o main.o p/ nao dar multiple definition em testes
+
 
 TARGET := game
 TARGET_TESTS=game_tests
@@ -29,7 +31,7 @@ all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(PKG_LIBS)
 
-tests: $(TEST_OBJS) $(OBJS)
+tests: $(TEST_OBJS) $(OBJS_NO_MAIN) # linka os objetos dos testes com todos os objetos exceto o main.o
 	$(CXX) $(CXXFLAGS) $^ -o $(TEST_DIR)/$(TARGET_TESTS) $(PKG_LIBS)
 
 # gera arquivos .d para recompilar só o necessário
