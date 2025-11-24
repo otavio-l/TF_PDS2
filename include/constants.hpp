@@ -17,8 +17,8 @@ namespace constants {
     constexpr float enemyVelocity{0.5};
     constexpr float enemyPosAbsX{394.0f};
     constexpr float enemyPosAbsY{120.0f};
-    constexpr float enemyWidth{15.0f};
-    constexpr float enemyHeight{30.0f};
+    constexpr float enemyWidth{7.0f};
+    constexpr float enemyHeight{20.0f};
     
 
     // Compatibility reasons

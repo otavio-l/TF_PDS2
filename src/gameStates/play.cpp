@@ -69,9 +69,9 @@ void PlayState::update(float dt) {
     enemy.setFollowing(mainCharacter);
 
     enemy.currentScreen(mainCharacter);
-    // if (enemy.onScreen) {
-        // enemy.animate()
-    // }
+    if (enemy.onScreen) {
+        enemy.animate();
+    }
     enemy.move();
 
     if (checkCollision(enemy, mainCharacter, 0, 0)) {
@@ -113,6 +113,6 @@ void PlayState::render(sf::RenderWindow& window) {
         window.draw(mainCharacter.drawable);
     }
     if (enemy.onScreen) {
-        window.draw(enemy.hitbox);
+        window.draw(enemy.drawable);
     }
 }
