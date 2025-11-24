@@ -19,8 +19,8 @@ TEST_CASE("LiveEntity parameterized constructor") {
     CHECK(entity.direction.left == false);
     CHECK(entity.direction.right == false);
     CHECK(entity.animateCounter == 0);
-    CHECK(entity.hitbox.getPosition().x == 100.0f);
-    CHECK(entity.hitbox.getPosition().y == 80.0f);
+    CHECK(entity.hitbox.getPosition().x == 50.0f);
+    CHECK(entity.hitbox.getPosition().y == 100.0f);
     CHECK(entity.hitbox.getSize().x == 10.0f);
     CHECK(entity.hitbox.getSize().y == 20.0f);
 }
@@ -56,15 +56,15 @@ TEST_CASE("PlayerEntity inheritance") {
     CHECK(player.direction.left == false);
     CHECK(player.direction.right == false);
     CHECK(player.animateCounter == 0);
-    CHECK(player.hitbox.getPosition().x == 100.0f);
-    CHECK(player.hitbox.getPosition().y == 80.0f);
+    CHECK(player.hitbox.getPosition().x == 50.0f);
+    CHECK(player.hitbox.getPosition().y == 100.0f);
     CHECK(player.hitbox.getSize().x == 10.0f);
     CHECK(player.hitbox.getSize().y == 20.0f);
 }
 
 TEST_CASE("PlayerEntity::move()") {
     sf::Texture texture;
-    PlayerEntity player(texture, 50.0f, 100.0f, 10.0f, 20.0f);
+    PlayerEntity player(texture, 50.0f, 100.0f, 7.0f, 20.0f);
 
     Direction collisions { false, false, false, false };
     float velocity = static_cast<float>(constants::mainCharacterVelocity);
@@ -72,25 +72,25 @@ TEST_CASE("PlayerEntity::move()") {
     // move up
     player.direction.up = true;
     player.move(collisions, velocity);
-    CHECK(player.hitbox.getPosition().y == 80.0f - velocity);
+    CHECK(player.hitbox.getPosition().y == 100.0f - velocity);
     player.direction.up = false;
 
     // right
     player.direction.right = true;
     player.move(collisions, velocity);
-    CHECK(player.hitbox.getPosition().x == 100.0f + velocity);
+    CHECK(player.hitbox.getPosition().x == 50.0f + velocity);
     player.direction.right = false;
 
     // down
     player.direction.down = true;
     player.move(collisions, velocity);
-    CHECK(player.hitbox.getPosition().y == 80.0f);
+    CHECK(player.hitbox.getPosition().y == 100.0f);
     player.direction.down = false;
 
     // left
     player.direction.left = true;
     player.move(collisions, velocity);
-    CHECK(player.hitbox.getPosition().x == 100.0f);
+    CHECK(player.hitbox.getPosition().x == 50.0f);
     player.direction.left = false;
 }
 
