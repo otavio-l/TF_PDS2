@@ -9,5 +9,8 @@ void ResourceManager::loadTexture(const std::string& filename) {
 }
 
 sf::Texture& ResourceManager::getTexture(const std::string& filename) {
+    if (textures.find(filename) == textures.end()) {
+        throw std::runtime_error(filename + " wasn't loaded previously");
+    }
     return textures.at(filename);
 }

@@ -5,7 +5,6 @@ constexpr float SPAWN_FLAG = 1337.0f;
 #include "mapArea.hpp"
 #include <array>
 #include <fstream>
-#include <cassert>
 #include <climits>
 #include <cmath>
 #include "constants.hpp"
@@ -56,8 +55,13 @@ nlohmann::json MapArea::loadJson(std::string jsonFile)  {
 
 void MapArea::loadCurrentSpawn(int targetMap, std::string targetSpawn) {
     // define default spawn coordinates if not specified in json
-    assert (mapData["spawn"].contains(targetSpawn));
-    assert (SPAWN_FLAG > (constants::xLogicPixels * 4));
+    if (!mapData["spawn"].contains(targetSpawn)) {
+        throw std::runtime_error("Map doesn't have spawn");
+    }
+    if (!SPAWN_FLAG > (constants::xLogicPixels * 4)) {
+        throw std::range_error("Value " + std::to_string(SPAWN_FLAG) 
+            + "used as flag isn't out of range");
+    };
 
     float absoluteX = mapData["spawn"][targetSpawn].value("x", SPAWN_FLAG);
     float absoluteY = mapData["spawn"][targetSpawn].value("y", SPAWN_FLAG);
@@ -167,7 +171,9 @@ void MapArea::loadWalls() {
 }
 
 void MapArea::loadmapEntities() {
-    assert (mapData.contains("mapEntities"));
+    if (!mapData.contains("mapEntities")) {
+        throw std::runtime_error("JSON file doesn't have entities");
+    }
 
     for (const auto& e : mapData["mapEntities"]) {
         MapEntity ent;

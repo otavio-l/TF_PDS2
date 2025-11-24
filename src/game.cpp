@@ -1,5 +1,4 @@
 #include "game.hpp"
-#include <cassert>
 #include "constants.hpp"
 
 
@@ -20,14 +19,18 @@ void Game::maintainStates() {
         switch (action.type)
         {
         case PendingActionType::Push:
-            assert (action.state);
+            if (!action.state) {
+                throw std::logic_error("Novo estado é vazio");
+            }
             stateStack.push_back(std::move(action.state));
             break;
         case PendingActionType::Pop:
             stateStack.pop_back();
             break;
         case PendingActionType::Change:
-            assert (action.state);
+            if (!action.state) {
+                throw std::logic_error("Novo estado é vazio");
+            }
             stateStack.pop_back();
             stateStack.push_back(std::move(action.state));
             break;

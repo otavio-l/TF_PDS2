@@ -19,7 +19,9 @@ void Cutscene::loadJson(std::string jsonFile) {
     file.close();
 
     this->spriteFile = cutscene.value("file", "");
-    assert (!cutscene.empty());
+    if (this->spriteFile.empty()) {
+        throw std::runtime_error("Config file for cutscene doesn't have the image");
+    }
     this->intervalSec = cutscene.value("intervalSec", 0.5f);
     this->repetitions = cutscene.value("repetitions", 1);
     this->next = cutscene.value("next", "");
@@ -32,7 +34,10 @@ Cutscene::Cutscene(Game &game, std::string jsonFile)
     resources.loadTexture(spriteFile);
     sf::Texture& texture {resources.getTexture(spriteFile)};
     int width { static_cast<int>( texture.getSize().x ) };
-    assert ((width % constants::xLogicPixels) == 0);
+    if ((width % constants::xLogicPixels) != 0) {
+        throw std::runtime_error("Cutscene image isn't divisible by " 
+            + std::to_string(constants::xLogicPixels));
+    }
 
     quantFrame = width / constants::xLogicPixels;
 }
