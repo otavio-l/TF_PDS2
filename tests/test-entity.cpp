@@ -1,4 +1,3 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "entity.hpp"
 #include "constants.hpp"
@@ -71,26 +70,28 @@ TEST_CASE("PlayerEntity::move()") {
     float velocity = static_cast<float>(constants::mainCharacterVelocity);
 
     // move up
+    player.direction.up = true;
     player.move(collisions, velocity);
     CHECK(player.hitbox.getPosition().y == 80.0f - velocity);
-
-    // move down
     player.direction.up = false;
+
+    // right
+    player.direction.right = true;
+    player.move(collisions, velocity);
+    CHECK(player.hitbox.getPosition().x == 100.0f + velocity);
+    player.direction.right = false;
+
+    // down
     player.direction.down = true;
     player.move(collisions, velocity);
     CHECK(player.hitbox.getPosition().y == 80.0f);
-
-    // move left
     player.direction.down = false;
+
+    // left
     player.direction.left = true;
     player.move(collisions, velocity);
-    CHECK(player.hitbox.getPosition().x == 100.0f - velocity);
-
-    // move right
-    player.direction.left = false;
-    player.direction.right = true;
-    player.move(collisions, velocity);
     CHECK(player.hitbox.getPosition().x == 100.0f);
+    player.direction.left = false;
 }
 
 TEST_CASE("EnemyEntity inheritance and methods") {
@@ -126,4 +127,29 @@ TEST_CASE("EnemyEntity inheritance and methods") {
         CHECK(enemy.direction.up == true);
         CHECK(enemy.direction.down == false);
     }
+}
+
+TEST_CASE("EnemyEntity::move()") {
+    sf::Texture texture;
+    EnemyEntity enemy(texture, constants::enemyPosAbsX, constants::enemyPosAbsY, 
+        constants::enemyWidth, constants::enemyHeight);
+
+    float initialX = enemy.absX;
+    float initialY = enemy.absY;
+
+    // Move right and down
+    enemy.direction.right = true;
+    enemy.direction.down = true;
+    enemy.move();
+    CHECK(enemy.absX == initialX + constants::enemyVelocity);
+    CHECK(enemy.absY == initialY + constants::enemyVelocity);
+    enemy.direction.right = false;
+    enemy.direction.down = false;
+
+    // Move left and up
+    enemy.direction.left = true;
+    enemy.direction.up = true;
+    enemy.move();
+    CHECK(enemy.absX == initialX);
+    CHECK(enemy.absY == initialY);
 }
