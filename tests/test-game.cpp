@@ -17,11 +17,20 @@ TEST_CASE("Game::run") {
     CHECK_NOTHROW(game.run());
 }
 
-// nesse teste o ideal seria verificar se o estado foi realmente alterado, ter algo
-// como um getCurrentState() ajudaria nisso
-TEST_CASE("Game::changeGameState") {
+TEST_CASE("Game state management") {
     Game game;
 
-    game.changeGameState(std::unique_ptr<GameState>(new MenuState(game)));
-    CHECK(true);
+    // Push a state
+    game.actions.emplace_back(
+        PendingActionType::Push,
+        std::move(std::unique_ptr<MenuState>(new MenuState(game)))
+    );
+    CHECK(game.actions.size() == 1);
+
+    // Pop a state
+    game.actions.emplace_back(
+        PendingActionType::Pop,
+        nullptr
+    );
+    CHECK(game.actions.size() == 2);
 }
