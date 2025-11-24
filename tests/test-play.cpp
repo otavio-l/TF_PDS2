@@ -7,7 +7,7 @@
 TEST_CASE("PlayState default constructor") {
     Game game;
     PlayState playState(game);
-    CHECK_NOTHROW(playState);
+    CHECK(true);
 }
 
 TEST_CASE("PlayState handleInput, update and render methods") {

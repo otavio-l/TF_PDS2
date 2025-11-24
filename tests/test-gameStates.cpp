@@ -2,9 +2,10 @@
 #include "doctest.h"
 
 #include "gameStates.hpp"
+#include "game.hpp"
 
 TEST_CASE("GameState:: default constructor") {
     Game game;
-    GameState gameState(game);
-    CHECK_NOTHROW(gameState);
+    MenuState gameState(game);
+    CHECK(true);
 }

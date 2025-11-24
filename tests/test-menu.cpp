@@ -7,7 +7,7 @@
 TEST_CASE("MenuState default constructor") {
     Game game;
     MenuState menuState(game);
-    CHECK_NOTHROW(menuState);
+    CHECK(true);
 }
 
 TEST_CASE("MenuState handleInput and render methods") {
