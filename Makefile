@@ -1,9 +1,9 @@
 CXX := g++
 
 SRC_DIR := src
-TEST_DIR = ./tests
+TEST_DIR = tests
 BUILD_DIR := build/obj
-COVERAGE_DIR = ./coverage
+COVERAGE_DIR = coverage
 
 SRCS := $(shell find $(SRC_DIR) -name "*.cpp") # inclui recursivamente todos os arquivos .cpp em src/
 OBJS := $(SRCS:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o) # troca a extensao .cpp por .o para gerar a lista de objetos
@@ -56,10 +56,10 @@ run: $(TARGET)
 	./$(TARGET)
 
 run_tests: tests
-	./${TEST_DIR}/${TARGET_TESTS}
+	${TEST_DIR}/${TARGET_TESTS}
 
 coverage: run_tests
-	gcovr -r . --exclude=$(TEST_DIR)/doctest.h
+	gcovr -r . --exclude="$(TEST_DIR)/doctest.h"
 
 html_coverage: run_tests
 	gcovr -r . --exclude=$(TEST_DIR)/doctest.h --html --html-details -o ${COVERAGE_DIR}/relatorio.html
@@ -67,6 +67,6 @@ html_coverage: run_tests
 clean:
 	rm -rf $(BUILD_DIR) 
 	rm -f $(TARGET)
-	rm f $(TEST_DIR)/$(TARGET_TESTS)
+	rm -f $(TEST_DIR)/$(TARGET_TESTS)
 	rm -f ${COVERAGE_DIR}/*
 	rm -rf ./doc/*
