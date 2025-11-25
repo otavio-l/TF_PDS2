@@ -91,6 +91,7 @@ public:
  * 
  */
 class MenuState : public GameState {
+private:
     sf::Sprite background;
     Button button;
 public:
@@ -114,6 +115,7 @@ public:
  * 
  */
 class PlayState : public GameState {
+private:
     PlayerEntity mainCharacter;
     MapArea mapArea;
     EnemyEntity enemy;
@@ -147,6 +149,7 @@ public:
  * 
  */
 class PausedState : public GameState {
+private:
     sf::Sprite background;
 public:
     PausedState(Game &game);
@@ -164,6 +167,7 @@ public:
  * 
  */
 class Cutscene : public GameState {
+private:
     int currentFrame;
     int quantFrame;
     float dtTotal;
@@ -206,6 +210,7 @@ public:
 };
 
 class GameOverState : public GameState {
+private:
     sf::Sprite background;
 public:
     GameOverState(Game &game);

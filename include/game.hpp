@@ -30,6 +30,7 @@ struct PendingAction {
  * 
  */
 class Game {
+private:
     std::vector<std::unique_ptr<GameState>> stateStack;
 
     /**

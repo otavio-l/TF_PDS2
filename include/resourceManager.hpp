@@ -10,6 +10,7 @@
 * @brief Carrega e gerencia recursos do jogo, como texturas, fontes e sons.
 */
 class ResourceManager {
+private:
     std::unordered_map<std::string, sf::Texture> textures;
     std::unordered_map<std::string, sf::Font> fonts;
     std::unordered_map<std::string, sf::SoundBuffer> sounds;

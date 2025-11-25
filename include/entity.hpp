@@ -27,22 +27,25 @@ struct Direction {
     bool left;
 };
 
-struct Entity {
+class Entity {
+public:
     sf::Sprite drawable;
-    // sf::FloatRect hitbox;
     sf::RectangleShape hitbox;
 };
 
-struct MapEntity: public Entity {
+class MapEntity: public Entity {
+public:
     bool hasCollision;
     bool hasTrigger;
     bool hasTexture;
     Trigger trigger;
 };
 
-struct LiveEntity: public Entity {
-    Direction direction;
+class LiveEntity: public Entity {
+private:
     int animateCounter;
+public:
+    Direction direction;
     float absX;
     float absY;
 
@@ -58,6 +61,7 @@ struct LiveEntity: public Entity {
 };
 
 struct PlayerEntity: public LiveEntity {
+public:
     /**
      * @brief Move o player se não houver colisões
      * 
@@ -70,7 +74,8 @@ struct PlayerEntity: public LiveEntity {
     PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
 };
 
-struct EnemyEntity: public LiveEntity {
+class EnemyEntity: public LiveEntity {
+public:
     bool onScreen;
 
     /**

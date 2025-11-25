@@ -7,7 +7,7 @@
 LiveEntity::LiveEntity() {}
 
 LiveEntity::LiveEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, 
-    float sizeY) : direction{false, false, false, false}, animateCounter(0), 
+    float sizeY) : animateCounter(0), direction{false, false, false, false}, 
     absX(posAbsX), absY(posAbsY) {
     
     drawable.setTexture(spriteSheet);

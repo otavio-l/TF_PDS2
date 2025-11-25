@@ -12,24 +12,10 @@
  * 
  */
 class MapArea {
-public:
-    // std::string jsonFile;
-    nlohmann::json mapData;
-    std::vector<MapEntity> mapEntities;
+private:
     ResourceManager &rM;
-    // std::string currentSpawn;
+    nlohmann::json mapData;
     LiveEntity &mainCharacter;
-    int checkpoint;
-
-    MapArea(LiveEntity &mainCharacter, ResourceManager &rM, int checkpoint);
-
-    /**
-     * @brief 
-     * 
-     * @param targetMap 
-     * @param currentSpawn 
-     */
-    void newMap(int targetMap, std::string currentSpawn);
 
     /**
      * @brief Cria o objeto json
@@ -73,6 +59,19 @@ public:
      * 
      */
     void loadWalls();
+public:
+    std::vector<MapEntity> mapEntities;
+    int checkpoint;
+
+    MapArea(LiveEntity &mainCharacter, ResourceManager &rM, int checkpoint);
+
+    /**
+     * @brief 
+     * 
+     * @param targetMap 
+     * @param currentSpawn 
+     */
+    void newMap(int targetMap, std::string currentSpawn);
 };
 
 #endif
