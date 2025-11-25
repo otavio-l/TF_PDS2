@@ -53,3 +53,28 @@ Para gerar o relatório em HTML
 ## Remover arquivos auxiliares
 `$ make clean`
 .
+---
+
+## Controles
+
+#### Menu inicial
+
+Teclas direcionais: troca botão selecionado
+
+Enter: aciona o botão
+
+#### Jogo
+
+A: move para esquerda
+
+S: move para baixo
+
+D: move para a direita
+
+W: move para cima
+
+Esc: pausa
+
+#### Pause
+
+Enter: despausa
