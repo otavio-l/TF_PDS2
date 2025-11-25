@@ -21,12 +21,20 @@ public:
     * @param filename nome do arquivo
     */
     void loadTexture(const std::string& filename);
+
+    void loadSound(const std::string& filename);
+
+    void loadFont(const std::string& filename);
     
     /**
     * @brief Retorna uma textura carregada anteriormente
     * @param name Identificador da textura
     */   
     sf::Texture& getTexture(const std::string& name);
+
+    sf::SoundBuffer& getSound(const std::string& name);
+
+    sf::Font& getFont(const std::string& name);
 };
 
 #endif
