@@ -23,9 +23,7 @@ Colaborações:
 Responsabilidades:
 
 - Parse json
-- Cria entidades
-- Mantém vetor de entidades
-- Carrega background
+- Extrai entidades
 - Define posição inicial do player nos mapas
 
 Colaborações:
@@ -40,17 +38,17 @@ Colaborações:
 
 Responsabilidades
 
-- Stack de estados do jogo
+- Fila de estados do jogo
 - Muda o estado atual do jogo
-- Janela de rendenização
+- Janela de renderização
 - Loop principal
 - Define FPS
 
 Colaborações:
 
-- MenuState
-- PlayState
-- PausedState
+- GameState
+- PendingAction
+
 
 ---
 
@@ -77,10 +75,10 @@ Colaborações:
 
 Responsabilidades
 
-- Texturas
-- Audios
-- Fontes
-- Load da mídia
+- Carrega texturas
+- Carrega áudios
+- Carrega fontes
+- Armazena mídia
 - Retorna mídia por nome
 
 Colaborações:
