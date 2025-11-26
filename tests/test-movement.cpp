@@ -73,7 +73,7 @@ TEST_CASE("updatePosition() movement") {
 
     mainCharacter.direction = { false, false, true, false }; // moving left
     mainCharacter.move({ false, false, false, false }, velocity);
-    CHECK(mainCharacter.hitbox.getPosition().x == 100.0f - velocity);
+    CHECK(mainCharacter.hitbox.getPosition().x == 100.0f + velocity);
 
     mainCharacter.direction = { false, false, false, true }; // moving right
     mainCharacter.move({ false, false, false, false }, velocity);
