@@ -1,4 +1,4 @@
-# README - JOGO - GRUPO 4 TURMA TN
+# README - JOGO - GRUPO 4 TURMA TN1
 
 Trabalho final de PDS2/2025-2 da UFMG, **integrantes**: Cauã M., Hugo S., Murilo N. e Otavio L.
 
