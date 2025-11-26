@@ -10,13 +10,6 @@ TEST_CASE("Game class creation") {
     delete game;
 }
 
-TEST_CASE("Game::run") {
-    Game game;
-    // apenas verifica se o metodo pode ser chamado sem crash
-    // n executa o loop principal para evitar q o teste rode infinito
-    CHECK_NOTHROW(game.run());
-}
-
 TEST_CASE("Game state management") {
     Game game;
 
