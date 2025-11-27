@@ -6,11 +6,13 @@
                 "${workspaceFolder}/include",
                 // For intellisense to work the path of the dependencies must be specified here
                 // $find ~/.conan2 -name Graphics.hpp
-                "~/.conan2/p/b/sfmlf79c0a1dab46b/p/include",
+                // "~/.conan2/p/b/sfmlf79c0a1dab46b/p/include",
                 // $find ~/.conan2 -name json.hpp
-                "~/.conan2/p/nlohmd014ef7748f4b/p/include/",
+                // "~/.conan2/p/nlohmd014ef7748f4b/p/include/",
                 "/usr/include",
-                "/usr/local/include"
+                "/usr/local/include",
+                "${workspaceFolder}/thirdParty/SFML-2.6.1/include",
+                "${workspaceFolder}/thirdParty/nlohmann"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
