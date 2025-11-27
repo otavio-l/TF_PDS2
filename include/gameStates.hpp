@@ -209,6 +209,10 @@ public:
     void render(sf::RenderWindow& window) override;
 };
 
+/**
+ * @brief Estado de game over
+ * 
+ */
 class GameOverState : public GameState {
 private:
     sf::Sprite background;

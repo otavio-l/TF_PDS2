@@ -16,6 +16,10 @@ enum class PendingActionType {
     Nothing
 };
 
+/**
+ * @brief Ação pendente para alteração de estado do jogo
+ * 
+ */
 struct PendingAction {
     PendingActionType type;
     std::unique_ptr<GameState> state;

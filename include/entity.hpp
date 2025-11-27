@@ -13,13 +13,20 @@ enum class TriggerType {
     CHECKPOINT
 };
 
-
+/**
+ * @brief Gatilhos de entidades de mapa
+ * 
+ */
 struct Trigger {
     TriggerType type;
     int targetMap;
     std::string targetSpawn;
 };
 
+/**
+ * @brief Controla as direções de movimentação de uma entidade
+ * 
+ */
 struct Direction {
     bool up;
     bool down;
@@ -27,12 +34,20 @@ struct Direction {
     bool left;
 };
 
+/**
+ * @brief Classe base para todas as entidades do jogo
+ * 
+ */
 class Entity {
 public:
     sf::Sprite drawable;
     sf::RectangleShape hitbox;
 };
 
+/**
+ * @brief Entidades de mapa (cenário, itens, etc.)
+ * 
+ */
 class MapEntity: public Entity {
 public:
     bool hasCollision;
@@ -41,6 +56,10 @@ public:
     Trigger trigger;
 };
 
+/**
+ * @brief Entidades vivas, podem ser animadas e movimentadas
+ * 
+ */
 class LiveEntity: public Entity {
 private:
     int animateCounter;
@@ -60,6 +79,10 @@ public:
     virtual ~LiveEntity() = default;
 };
 
+/**
+ * @brief Entidade do player
+ * 
+ */
 struct PlayerEntity: public LiveEntity {
 public:
     /**
@@ -74,6 +97,10 @@ public:
     PlayerEntity(sf::Texture& spriteSheet, float posAbsX, float posAbsY, float sizeX, float sizeY);
 };
 
+/**
+ * @brief Entidade do inimigo
+ * 
+ */
 class EnemyEntity: public LiveEntity {
 public:
     bool onScreen;
