@@ -21,6 +21,7 @@ readSave("checkpoint.txt")) {
     resources.loadTexture("house");
     resources.loadTexture("well");
     resources.loadTexture("sprites/main_character");
+    resources.loadTexture("sprites/enemy");
 
     mainCharacter = PlayerEntity(
         resources.getTexture("sprites/main_character"),
@@ -33,7 +34,7 @@ readSave("checkpoint.txt")) {
                    spawnLookup[(long unsigned int)mapArea.checkpoint]);
 
     enemy = EnemyEntity(
-        resources.getTexture("sprites/main_character"), 
+        resources.getTexture("sprites/enemy"), 
         constants::enemyPosAbsX, constants::enemyPosAbsY, 
         constants::enemyWidth, constants::enemyHeight
     );
