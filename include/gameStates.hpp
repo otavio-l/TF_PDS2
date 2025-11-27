@@ -79,7 +79,7 @@ public:
     /**
      * @brief Rendeniza os sf::Sprites
      * 
-     * @param window Janela para rendenização
+     * @param window Janela para renderização
      */
     virtual void render(sf::RenderWindow& window) = 0;
 
@@ -105,7 +105,7 @@ public:
     /**
      * @brief Rendeniza o menu com o botão selecionado
      * 
-     * @param window Janela de rendenização
+     * @param window Janela de renderização
      */
     void render(sf::RenderWindow& window) override;
 };
@@ -139,7 +139,7 @@ public:
     /**
      * @brief Rendeniza os sprites por profundidade
      * 
-     * @param window Janela de rendenização
+     * @param window Janela de renderização
      */
     void render(sf::RenderWindow& window) override;
 };
@@ -159,6 +159,11 @@ public:
      * @param event Evento do SFML
      */
     void handleInput(sf::Event& event) override;
+    /**
+     * @brief Rendeniza tela de pause
+     * 
+     * @param window Janela de renderização
+     */
     void render(sf::RenderWindow& window) override;
 };
 
@@ -204,7 +209,7 @@ public:
     /**
      * @brief Rendeniza frame atual
      * 
-     * @param window Janela de rendenização
+     * @param window Janela de renderização
      */
     void render(sf::RenderWindow& window) override;
 };
@@ -224,6 +229,11 @@ public:
      * @param event Evento do SFML
      */
     void handleInput(sf::Event& event) override;
+    /**
+     * @brief Rendeniza tela de Game Over
+     * 
+     * @param window Janela de renderização
+     */
     void render(sf::RenderWindow& window) override;
 };
 

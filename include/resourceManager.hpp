@@ -22,8 +22,16 @@ public:
     */
     void loadTexture(const std::string& filename);
 
+    /**
+    * @brief Carrega um áudio de um arquivo
+    * @param filename nome do arquivo
+    */
     void loadSound(const std::string& filename);
 
+    /**
+    * @brief Carrega uma fonte de um arquivo
+    * @param filename nome do arquivo
+    */
     void loadFont(const std::string& filename);
     
     /**
@@ -32,8 +40,16 @@ public:
     */   
     sf::Texture& getTexture(const std::string& name);
 
+    /**
+    * @brief Retorna um áudio carregada anteriormente
+    * @param name Identificador da textura
+    */
     sf::SoundBuffer& getSound(const std::string& name);
 
+    /**
+    * @brief Retorna uma fonte carregada anteriormente
+    * @param name Identificador da textura
+    */
     sf::Font& getFont(const std::string& name);
 };
 
