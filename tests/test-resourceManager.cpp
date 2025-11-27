@@ -24,4 +24,30 @@ TEST_CASE("resourceManager - carregar textura inexistente") {
         std::runtime_error);
 }
 
-// TODO: Add similar tests for loadSound, getSound, loadFont, getFont methods
+TEST_CASE("resourceManager - obter áudio nao carregada") {
+    ResourceManager resourceManager;
+
+    CHECK_THROWS_AS(resourceManager.getSound("nonExistentSound"), 
+        std::runtime_error);
+}
+
+TEST_CASE("resourceManager - carregar áudio inexistente") {
+    ResourceManager resourceManager;
+
+    CHECK_THROWS_AS(resourceManager.loadSound("nonExistentFile"), 
+        std::runtime_error);
+}
+
+TEST_CASE("resourceManager - obter fonte nao carregada") {
+    ResourceManager resourceManager;
+
+    CHECK_THROWS_AS(resourceManager.getFont("nonExistentFont"), 
+        std::runtime_error);
+}
+
+TEST_CASE("resourceManager - carregar fonte inexistente") {
+    ResourceManager resourceManager;
+
+    CHECK_THROWS_AS(resourceManager.loadFont("nonExistentFile"), 
+        std::runtime_error);
+}
