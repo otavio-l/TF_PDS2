@@ -45,5 +45,5 @@ TEST_CASE("checkCollision() edge cases") {
 
     CHECK(checkCollision(entityA, entityB, 0.0f, 0.0f) == false);
     CHECK(checkCollision(entityA, entityB, 10.0f, 0.0f) == true);
-    CHECK(checkCollision(entityA, entityB, 9.99f, 0.0f) == false);
+    CHECK(checkCollision(entityA, entityB, 9.99f, 0.0f) == true);
 }

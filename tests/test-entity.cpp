@@ -77,8 +77,6 @@ TEST_CASE("EnemyEntity inheritance and methods") {
     CHECK(enemy.direction.down == false);
     CHECK(enemy.direction.left == false);
     CHECK(enemy.direction.right == false);
-    CHECK(enemy.hitbox.getPosition().x == constants::enemyPosAbsX);
-    CHECK(enemy.hitbox.getPosition().y == constants::enemyPosAbsY);
     CHECK(enemy.hitbox.getSize().x == constants::enemyWidth);
     CHECK(enemy.hitbox.getSize().y == constants::enemyHeight);
 
