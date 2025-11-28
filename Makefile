@@ -11,13 +11,15 @@ TEST_SRCS := $(shell find $(TEST_DIR) -name "*.cpp")
 TEST_OBJS := $(TEST_SRCS:$(TEST_DIR)/%.cpp=$(BUILD_DIR)/tests/%.o)
 OBJS_NO_MAIN := $(filter-out $(BUILD_DIR)/main.o, $(OBJS)) # todos os objetos exceto o main.o p/ nao dar multiple definition em testes
 INCLUDES := -Iinclude -IthirdParty -IthirdParty/SFML-2.6.1/include -IthirdParty/nlohmann
-LDFLAGS := -LthirdParty/SFML-2.6.1/lib \
+SFML_LIB_DIR := $(abspath thirdParty/SFML-2.6.1/lib)
+
+LDFLAGS := -L$(SFML_LIB_DIR) \
            -lsfml-graphics \
            -lsfml-window \
            -lsfml-system \
            -lsfml-audio \
-           -Wl,-rpath,'$$ORIGIN/../thirdParty/SFML-2.6.1/lib' \
-		   -lgcov
+           -Wl,-rpath,$(SFML_LIB_DIR) \
+           -lgcov
 
 TARGET := game
 TARGET_TESTS=game_tests
@@ -74,7 +76,7 @@ html_coverage: run_tests
 	--html --html-details -o ${COVERAGE_DIR}/relatorio.html
 
 clean:
-	rm -rf $(BUILD_DIR) "
+	rm -rf $(BUILD_DIR)
 	rm -f $(TARGET)
 	rm -f $(TEST_DIR)/$(TARGET_TESTS)
 	rm -f ${COVERAGE_DIR}/*
