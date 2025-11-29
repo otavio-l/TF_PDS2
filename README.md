@@ -24,9 +24,10 @@ Esse projeto utiliza as seguintes linguagem, ferramentas e bibliotecas:
 ## Compilação
 > Esteja no diretório root do projeto
 
-> Primeira vez usando o conan execute `$ conan profile detect`
+~~Primeira vez usando o conan execute `$ conan profile detect`~~
 
-`$ conan install . --lockfile=conan.lock --output-folder=build --build=missing -c tools.system.package_manager:mode=install`
+~~`$ conan install . --lockfile=conan.lock --output-folder=build --build=missing -c tools.system.package_manager:mode=install`~~
+Dependências já instaladas no thirdParty
 
 `$ make`
 
